@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container mt-4">
+	<a th:href="@{/medic/new}" class="btn btn-primary">Add Medic</a>
+		<table class="table">
+			<thead>
+				<tr>
+				
+				<td>ID</td>
+				<td>NAME</td>
+				<td>SURNAME</td>
+				<td>AGE</td>
+				<td>HIRE DATE</td>
+				<td>SPECIALTY</td>
+				<td>USERNAME</td>
+				<td>PASSWORD</td>
+				<td>ACTIONS</td>
+				
+				</tr>
+			</thead>
+			
+			<tbody th:each="medico:${medicos}">
+				<tr>
+				
+				<td th:text="${medico.id}"></td>
+				<td th:text="${medico.name}"></td>
+				<td th:text="${medico.surname}"></td>
+				<td th:text="${medico.age}"></td>
+				<td th:text="${medico.date}"></td>
+				<td th:text="${medico.specialty}"></td>
+				<td th:text="${medico.username}"></td>
+				<td th:text="${medico.password}"></td>
+				<td>
+					<a th:href="@{/medic/modify/}+${medico.id}" class="btn btn-warning">Modify</a>
+					<a th:href="@{/medic/delete/}+${medico.id}" class="btn btn-danger">Delete</a>
+				</td>
+				
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="funciones.js"></script>
+</body>
+</html>
