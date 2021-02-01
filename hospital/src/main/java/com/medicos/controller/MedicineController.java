@@ -24,13 +24,13 @@ public class MedicineController {
 	public String list(Model model) {
 		List<Medicine> medicine=service.list();
 		model.addAttribute("medicines",medicine);
-		return "Medicineindex";
+		return "Medicine/Medicineindex";
 	}
 	
 	@GetMapping("/new")
 	public String add(Model model) {
 		model.addAttribute("medicine",new Medicine());
-		return "Medicineform";
+		return "Medicine/Medicineform";
 	}
 	
 	@PostMapping("/save")
@@ -43,7 +43,7 @@ public class MedicineController {
 	public String modify(@PathVariable int id, Model model) {
 		Optional <Medicine> medicine=service.listId(id);
 		model.addAttribute("medicine",medicine);
-		return "Medicineform";
+		return "Medicine/Medicineform";
 	}
 	
 	@GetMapping("/delete/{id}")
