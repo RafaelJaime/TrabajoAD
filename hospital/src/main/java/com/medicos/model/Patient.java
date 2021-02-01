@@ -27,7 +27,7 @@ public class Patient {
 	
 	@Column(length=30)
 	private String username, password;
-	
+
 	public Patient() {
 		super();
 	}
@@ -42,7 +42,6 @@ public class Patient {
 		this.username = username;
 		this.password = password;
 	}
-
 	public int getId() {
 		return id;
 	}

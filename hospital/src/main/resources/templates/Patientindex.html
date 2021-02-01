@@ -18,7 +18,6 @@
 				<td>AGE</td>
 				<td>DIRECTION</td>
 				<td>USERNAME</td>
-				<td>PASSWORD</td>
 				<td>ACTIONS</td>
 				
 				</tr>
@@ -26,14 +25,13 @@
 			
 			<tbody th:each="patient:${patients}">
 				<tr>
-				
+			
 				<td th:text="${patient.id}"></td>
 				<td th:text="${patient.name}"></td>
 				<td th:text="${patient.surname}"></td>
 				<td th:text="${patient.age}"></td>
 				<td th:text="${patient.direction}"></td>
 				<td th:text="${patient.username}"></td>
-				<td th:text="${patient.password}"></td>
 				<td>
 					<a th:href="@{/patient/modify/}+${patient.id}" class="btn btn-warning">Modify</a>
 					<a th:href="@{/patient/delete/}+${patient.id}" class="btn btn-danger">Delete</a>
