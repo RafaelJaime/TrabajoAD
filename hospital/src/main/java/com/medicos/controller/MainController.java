@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	@GetMapping("/")
 	public String welcome() {
-		return "base";
+		return "index";
+	}
+	@GetMapping("/about")
+	public String about() {
+		return "general/about";
+	}
+	@GetMapping("/contact")
+	public String contact() {
+		return "general/contact";
 	}
 }

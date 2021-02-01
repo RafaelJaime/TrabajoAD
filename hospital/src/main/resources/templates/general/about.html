@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantillas/base.html :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="plantillas/base.html :: headboard"></nav>
+		<aside th:replace="plantillas/base.html :: menu"></aside>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0">About SegPrivado</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">SegPrivado</h5>
+								</div>
+								<div class="card-body">
+									<div class="row">
+
+										<div class="col-md-7">
+											<p>La compañía cuenta con el servicio Sanitas 24 horas,
+												que ofrece al cliente atención médica telefónica 24 horas
+												horas, los 365 Días del Año. En este teléfono el asegurado
+												podrá pedir asesoramiento sobre la medicación, tratamientos
+												o cualquier pregunta de carácter médico. Además, la
+												asistencia sanitaria de urgencia se prestará en todas
+												aquellas poblaciones donde Sanitas tenga concertado este
+												servicio. En cuanto a la medicina primaria, la compañía
+												incluye en todos sus seguros la medicina general (incluida
+												la asistencia a domicilio, familiar, pediatría y
+												puericultura y el servicio de enfermería.</p>
+										</div>
+										<div class="col-md-3">
+											<img alt="Logotipo de la empresa" src="logo/logo.png"
+												width="300" height="300">
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer th:replace="plantillas/base.html :: footer"></footer>
+	</div>
+	<div th:replace="plantillas/base.html :: js"></div>
+</body>
+</html>
