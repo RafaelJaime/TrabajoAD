@@ -19,7 +19,6 @@
 				<td>HIRE DATE</td>
 				<td>SPECIALTY</td>
 				<td>USERNAME</td>
-				<td>PASSWORD</td>
 				<td>ACTIONS</td>
 				
 				</tr>
@@ -35,7 +34,6 @@
 				<td th:text="${medico.date}"></td>
 				<td th:text="${medico.specialty}"></td>
 				<td th:text="${medico.username}"></td>
-				<td th:text="${medico.password}"></td>
 				<td>
 					<a th:href="@{/medic/modify/}+${medico.id}" class="btn btn-warning">Modify</a>
 					<a th:href="@{/medic/delete/}+${medico.id}" class="btn btn-danger">Delete</a>
