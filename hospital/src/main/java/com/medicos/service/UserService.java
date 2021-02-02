@@ -22,7 +22,7 @@ public class UserService implements UserDetailsService{
 	
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	public User register(User user){
+	public com.medicos.model.User register(com.medicos.model.User user){
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
 		user.setRole("ROLE_USER");
@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user=userRepository.findByUsername(username);
+		com.medicos.model.User user=userRepository.findByUsername(username);
 		
 		UserBuilder builder=null;
 		
