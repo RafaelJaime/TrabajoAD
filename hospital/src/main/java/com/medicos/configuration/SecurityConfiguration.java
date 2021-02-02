@@ -34,13 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
-<<<<<<< HEAD
-			.antMatchers("/","/photos/**","/auth/**","/webjars/**","/css/**","/patient/**","/medicine/**","/medic/**","/files/**","/auth/**").permitAll()
-			.anyRequest().authenticated()
-=======
-//			.antMatchers("/","/photos/**","/auth/**","/webjars/**","/css/**","/patient/**","/medicine/**","/medic/**","/files/**").permitAll()
+//			.antMatchers("/","/photos/**","/auth/**","/webjars/**","/css/**","/patient/**","/medicine/**","/medic/**","/files/**","/auth/**").permitAll()
+//			.anyRequest().authenticated()
 			.anyRequest().permitAll()
->>>>>>> branch 'master' of https://github.com/RafaelJaime/TrabajoAD.git
 			.and()
 		.formLogin()
 			.loginPage("/auth/login")
