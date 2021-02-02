@@ -35,19 +35,19 @@ public class LoginController {
 		return "User/login";
 	}
 	
-	@GetMapping("/login-post")
+	@GetMapping("/auth/login-post")
 	public String loginPost() {
-		return "redirect:/patient/list";
+		return "redirect:/";
 	}
 	
-	@PostMapping("/auth/register")
+	@PostMapping("/auth/register-post")
 	public String register(@ModelAttribute User user, RedirectAttributes flash) {
 		userService.register(user);
 		flash.addFlashAttribute("Success","User registered successfully!");
 		return "redirect:/auth/login";
 	}
 	
-	@GetMapping("/auth/registerForm")
+	@GetMapping("/auth/register")
 	public String registerForm(Model model) {
 		model.addAttribute("user", new User());
 		return "User/register";
