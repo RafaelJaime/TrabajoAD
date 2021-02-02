@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/paco")
+@RequestMapping("")
 public class MainController {
-	@GetMapping("/")
+	@GetMapping("")
 	public String welcome() {
 		return "base";
-	}AQUIAQUI
+	}
 }
