@@ -25,7 +25,7 @@ public class MedicineRest {
 	public List<Medicine> list() {
 		return medicine.list();
 	}
-//	Este por ahora no funciona
+//	Anadir ne headers: content-type application/json
 	@PostMapping("/save")
 	public void save(@RequestBody Medicine medicina) {
 		medicine.save(medicina);
@@ -35,7 +35,6 @@ public class MedicineRest {
 	public void update(@RequestBody Medicine m) {
 		medicine.save(m);
 	}
-//	No funciona
 	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		medicine.delete(id);
