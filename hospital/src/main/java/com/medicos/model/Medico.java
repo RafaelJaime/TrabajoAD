@@ -1,15 +1,22 @@
 package com.medicos.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name ="medic")
 public class Medico {
 	
@@ -22,7 +29,12 @@ public class Medico {
 	
 	@Column(length=50)
 	private String surname;
+	
+	@Column
 	private int age;
+	
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
 	@Column(length=40)
@@ -39,10 +51,9 @@ public class Medico {
 		super();
 	}
 	
-	public Medico(int id, String name, String surname, int age, Date date, String specialty, String username,
+	public Medico(String name, String surname, int age, Date date, String specialty, String username,
 			String password) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;

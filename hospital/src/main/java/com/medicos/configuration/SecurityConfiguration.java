@@ -38,13 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
-<<<<<<< HEAD
-			.antMatchers("/","/photos/**","/auth/**","/webjars/**","/css/**","/patient/**","/medicine/**","/medic/**","/files/**","/auth/**").permitAll()
-			.anyRequest().authenticated()
-=======
 //			.antMatchers("/","/photos/**","/auth/**","/webjars/**","/css/**","/patient/**","/medicine/**","/medic/**","/files/**").permitAll()
 			.anyRequest().permitAll()
->>>>>>> branch 'master' of https://github.com/RafaelJaime/TrabajoAD.git
+//			.anyRequest().authenticated()
 			.and()
 		.formLogin()
 			.loginPage("/auth/login")
@@ -54,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.and()
 		.logout()
 			.logoutUrl("/logout")
-			.logoutSuccessUrl("/auth/login?logout")
+			.logoutSuccessUrl("/")
 			.permitAll();
 		http.cors().and().csrf().disable();
 	}

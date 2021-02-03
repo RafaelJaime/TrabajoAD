@@ -20,13 +20,18 @@ public class Patient {
 	
 	@Column(length=50)
 	private String surname;
+	
+	@Column
 	private int age;
 	
 	@Column(length=100)
 	private String direction;
 	
 	@Column(length=30)
-	private String username, password;
+	private String username;
+	
+	@Column(length=30)
+	private String password;
 
 	public Patient() {
 		super();

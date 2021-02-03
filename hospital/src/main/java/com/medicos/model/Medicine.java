@@ -21,10 +21,13 @@ public class Medicine {
 	@Column(length=100)
 	private String description;
 	
+	@Column(columnDefinition="char(1)")
 	private char prescription;
 	
+	@Column
 	private float price;
 	
+	@Column
 	private int stock;
 
 	public Medicine(int id, String name, String description, char prescription, float price, int stock) {
