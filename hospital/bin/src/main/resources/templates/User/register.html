@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container mt-4">
+	<form th_action="@{/auth/register}" th:object="${user}" method="POST">
+	
+		<h2>Register</h2>
+			<label>Username</label>
+			<input type="text" th:field="*{username}" placeholder="Username" id="username"/>
+			</br>
+			<label>Password</label>
+			<input type="password" th:field="*{password}" placeholder="Password" id="password"/>
+			</br>
+			<button type="submit">Register</button>
+	</form>
+		
+	</div>
+</body>
+</html>
