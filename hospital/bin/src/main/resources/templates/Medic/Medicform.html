@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+	<div class="container mt-4">
+		<div class="col-sm-6">
+			<form th:action="@{/medic/save}" th:object=${medico} method="post">
+				<div class="card">
+					<div class="card-header">
+						<h3>Medic Model</h3>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+							<label>ID</label>
+							<input th:field="*{id}" type="number" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label>NAME</label>
+							<input th:field="*{name}" type="text" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label>SURNAME</label>
+							<input th:field="*{surname}" type="text" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label>AGE</label>
+							<input th:field="*{age}" type="number" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label>HIRE DATE</label>
+							<input th:field="*{date}" type="date" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label for="specialty">SPECIALTY</label>
+							<select id="specialty" class="form-control" name="specialty">
+				                <option value="Family doctor">Family doctor</option>
+				                <option value="Digestive">Digestive</option>
+				                <option value="Neurologist">Neurologist</option>
+				                <option value="Dermatologist">Dermatologist</option>
+				                <option value="Traumatologist">Traumatologist</option>
+				            </select>
+						</div>
+						<div class="form-group">
+							<label>USERNAME</label>
+							<input th:field="*{username}" type="text" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label>PASSWORD</label>
+							<input th:field="*{password}" type="text" class="form-control"/>
+						</div>
+					</div>
+					<div class="card-footer">
+						<input type="submit" value="Save" class="btn btn-success"/>
+						<a href="/medic/list" class="btn btn-secondary">Return</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</html>

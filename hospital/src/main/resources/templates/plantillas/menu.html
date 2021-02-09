@@ -14,6 +14,14 @@
 			<div class="image">
 				<img src="dist/img/user2-160x160.jpg" th:src="@{/dist/img/user2-160x160.jpg}" class="img-circle elevation-2"
 					alt="User Image">
+					<div sec:authorize="isAuthenticated()" class="info">
+					<form th:action="@{/logout}" method="post">
+            			<input type="submit" value="Deslogueate" class="d-block"/>
+        			</form>
+					</div>
+					<div sec:authorize="isAnonymous()" class="info">
+					<a href="/login">Login</a>
+					</div>
 			</div>
 			<div class="info">
 				<a href="" class="d-block"></a>

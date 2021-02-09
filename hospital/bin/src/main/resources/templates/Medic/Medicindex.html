@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantillas/base.html :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="plantillas/base.html :: headboard"></nav>
+		<aside th:replace="plantillas/base.html :: menu"></aside>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0">Medics of SegPrivado</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Medics</h5>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<a th:href="@{/medic/new}" class="btn btn-primary">Add
+											Medic</a>
+											<br>
+										<table class="table">
+											<thead>
+												<tr>
+
+													<td>ID</td>
+													<td>NAME</td>
+													<td>SURNAME</td>
+													<td>AGE</td>
+													<td>HIRE DATE</td>
+													<td>SPECIALTY</td>
+													<td>USERNAME</td>
+													<td>ACTIONS</td>
+
+												</tr>
+											</thead>
+
+											<tbody th:each="medico:${medicos}">
+												<tr>
+
+													<td th:text="${medico.id}"></td>
+													<td th:text="${medico.name}"></td>
+													<td th:text="${medico.surname}"></td>
+													<td th:text="${medico.age}"></td>
+													<td th:text="${medico.date}"></td>
+													<td th:text="${medico.specialty}"></td>
+													<td th:text="${medico.username}"></td>
+													<td><a th:href="@{/medic/modify/}+${medico.id}"
+														class="btn btn-warning">Modify</a> <a
+														th:href="@{/medic/delete/}+${medico.id}"
+														class="btn btn-danger">Delete</a></td>
+
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer th:replace="plantillas/base.html :: footer"></footer>
+	</div>
+	<div th:replace="plantillas/base.html :: js"></div>
+</body>
+</html>

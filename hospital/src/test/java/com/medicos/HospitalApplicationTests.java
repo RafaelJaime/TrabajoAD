@@ -21,7 +21,7 @@ class HospitalApplicationTests {
 	void CreateUser() {
 		User us=new User();
 		us.setId(1);
-		us.setName("Ale");
+		us.setName("Akira");
 		us.setPassword(encoder.encode("123"));
 		User newUser = repository.save(us);
 	}
