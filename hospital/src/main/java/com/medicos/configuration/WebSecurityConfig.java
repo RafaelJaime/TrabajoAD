@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PatientUserDetailsService userDetailsService() {
         return new PatientUserDetailsService();
     }
-     
+    
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -55,7 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().permitAll()
             .and()
             .formLogin()
+            	.loginPage("/login")
                 .usernameParameter("username")
+                .passwordParameter("password")
+                .loginProcessingUrl("/login-post")
                 .defaultSuccessUrl("/users")
                 .permitAll()
             .and()
