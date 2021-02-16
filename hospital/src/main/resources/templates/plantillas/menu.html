@@ -1,10 +1,11 @@
 <!-- Main Sidebar Container -->
-<aside th:fragment="menu" class="main-sidebar sidebar-dark-primary elevation-4">
+<aside th:fragment="menu"
+	class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
 	<a href="/" class="brand-link"> <img
-		src="dist/img/AdminLTELogo.png" th:src="@{/dist/img/AdminLTELogo.png}" alt="AdminLTE Logo"
-		class="brand-image img-circle elevation-3" style="opacity: .8">
-		<span class="brand-text font-weight-light">SegPrivado</span>
+		src="dist/img/AdminLTELogo.png" th:src="@{/dist/img/AdminLTELogo.png}"
+		alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+		style="opacity: .8"> <span class="brand-text font-weight-light">SegPrivado</span>
 	</a>
 
 	<!-- Sidebar -->
@@ -12,22 +13,25 @@
 		<!-- Sidebar user panel (optional) -->
 		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 			<div class="image">
-				<img src="dist/img/user2-160x160.jpg" th:src="@{/dist/img/user2-160x160.jpg}" class="img-circle elevation-2"
-					alt="User Image">
-					<div sec:authorize="isAuthenticated()" class="info">
+				<img src="dist/img/user2-160x160.jpg"
+					th:src="@{/dist/img/user2-160x160.jpg}"
+					class="img-circle elevation-2" alt="User Image">
+				<div sec:authorize="isAuthenticated()" class="info">
 					<form th:action="@{/logout}" method="post">
-            			<input type="submit" value="Deslogueate" class="d-block"/>
-        			</form>
-					</div>
-					<div sec:authorize="isAnonymous()" class="info">
+						<input type="submit" value="Logout" class="d-block" />
+					</form>
+				</div>
+				<div sec:authorize="isAnonymous()" class="info">
 					<a href="/login">Login</a>
-					</div>
+				</div>
 			</div>
 			<div class="info">
 				<a href="" class="d-block"></a>
 			</div>
 		</div>
-
+		<ul class="nav nav-pills nav-sidebar flex-column">
+		<li class="nav-header" sec:authorize="isAuthenticated()">Logged as:<br> <span sec:authentication="principal.authorities"></span></li>
+		</ul>
 		<!-- SidebarSearch Form -->
 		<div class="form-inline">
 			<div class="input-group" data-widget="sidebar-search">
@@ -43,27 +47,46 @@
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
-			<ul class="nav nav-pills nav-sidebar flex-column"
-				data-widget="treeview" role="menu" data-accordion="false">
+		<ul class="nav nav-pills nav-sidebar flex-column"
+				sec:authorize="isAnonymous()" data-widget="treeview" role="menu"
+				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-				<li class="nav-header">List</li>
-				<li class="nav-item"><a href="/medic/list"
-					class="nav-link"> <i class="nav-icon far fa-calendar-alt"></i>
+				<li class="nav-item"><a href="/login" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
 						<p>
-							Medics<span class="badge badge-info right">2</span>
+							Login
 						</p>
 				</a></li>
-				<li class="nav-item"><a href="/medicine/list"
-					class="nav-link"> <i class="nav-icon far fa-calendar-alt"></i>
+				<li class="nav-item"><a href="/medic/list" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
 						<p>
-							Medicines<span class="badge badge-info right">2</span>
+							SingUp
 						</p>
 				</a></li>
-				<li class="nav-item"><a href="/patient/list"
-					class="nav-link"> <i class="nav-icon far fa-calendar-alt"></i>
+			</ul>
+			<ul class="nav nav-pills nav-sidebar flex-column"
+				sec:authorize="hasRole('ADMIN')" data-widget="treeview" role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li class="nav-header">Admin menu</li>
+				<li class="nav-item"><a href="/patient/list" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
 						<p>
-							Patients<span class="badge badge-info right">2</span>
+							Patients
+						</p>
+				</a></li>
+				<li class="nav-item"><a href="/medic/list" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
+						<p>
+							Medics
+						</p>
+				</a></li>
+				<li class="nav-item"><a href="/medicine/list" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
+						<p>
+							Medicines
 						</p>
 				</a></li>
 			</ul>

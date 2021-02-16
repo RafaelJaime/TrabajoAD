@@ -19,36 +19,34 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(length=50)
+	@Column(length=50,unique=true)
 	private String name;
 	
 	@Column(length=50)
 	private String password;
 	
-	@Column(length=30,nullable = false)
+	@Column(length=30)
 	private String username;
 	
-	@Column(length=30,nullable = false)
+	@Column(length=30)
 	private String role;
 	
 	//Medicos
-	@Column(length=50,nullable = false)
+	@Column(length=50)
 	private String surname;
 	
-	@Column
 	private int age;
 	
 	@CreatedDate
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
 	private Date date;
 	
-	@Column(length=40,nullable = false)
+	@Column(length=40)
 	private String specialty;
 	
 	//Pacientes
 	
-	@Column(length=100, nullable = false)
+	@Column(length=100)
 	private String direction;
 	
 	public int getId() {
