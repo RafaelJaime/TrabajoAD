@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.medicos.interfaceService.IMedicoService;
+import com.medicos.interfaces.IUser;
 import com.medicos.interfaces.JPatient;
 import com.medicos.model.Medico;
 import com.medicos.model.Patient;
+import com.medicos.model.User;
 
 @Controller
 @RequestMapping("")
@@ -48,6 +50,7 @@ public class MainController {
 		return "general/contact";
 	}
 //	Parte usuarios
+	
 	@Autowired
     private JPatient jpatient;
 	@GetMapping("/register")
@@ -55,16 +58,40 @@ public class MainController {
 		model.addAttribute("user", new Patient());
 	    return "User/register";
 	}
+	
+	@GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("usuario", new User());
+        return "User/login";
+    }
+	
+//	@PostMapping("/process_register")
+//	public String processRegister(Patient user) {
+//	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//	    String encodedPassword = passwordEncoder.encode(user.getPassword());
+//	    user.setPassword(encodedPassword);
+//	     
+//	    jpatient.save(user);
+//	     
+//	    return "User/register_success";
+//	}
+	
+	@Autowired
+	private IUser repository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	@PostMapping("/process_register")
-	public String processRegister(Patient user) {
-	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	    String encodedPassword = passwordEncoder.encode(user.getPassword());
-	    user.setPassword(encodedPassword);
-	     
-	    jpatient.save(user);
-	     
-	    return "User/register_success";
+	public String processRegister(User user) {
+		User us=new User();
+		us.setName(user.getName());
+		us.setPassword(encoder.encode(user.getPassword()));
+		User newUser = repository.save(us);
+		
+		return "User/register_success";
 	}
+	
 	@GetMapping("/users")
 	public String listUsers(Model model) {
 	    List<Patient> listUsers = jpatient.findAll();
