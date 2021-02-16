@@ -21,7 +21,7 @@ public class Patient {
 	@Column(length=50, nullable = false)
 	private String surname;
 	
-	@Column
+	@Column(nullable = false)
 	private int age;
 	
 	@Column(length=100, nullable = false)
@@ -37,9 +37,8 @@ public class Patient {
 		super();
 	}
 	
-	public Patient(int id, String name, String surname, int age, String direction, String username, String password) {
+	public Patient(String name, String surname, int age, String direction, String username, String password) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
