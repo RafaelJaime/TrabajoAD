@@ -20,9 +20,8 @@ class HospitalApplicationTests {
 	@Test
 	void CreateUser() {
 		User us=new User();
-		us.setId(1);
 		us.setName("Akira");
-		us.setPassword(encoder.encode("123"));
+		us.setPassword(encoder.encode("akira"));
 		User newUser = repository.save(us);
 	}
 
