@@ -22,16 +22,16 @@ public class Buy {
 	private float prize;
 	
 	@ManyToOne
-	private Patient idPatient;
+	private User Patient_id;
 	
 	public Buy() {};
 	
-	public Buy(int id, Date date, int prize, Patient idPatient) {
+	public Buy(int id, Date date, int prize, User Patient_id) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.prize = prize;
-		this.idPatient = idPatient;
+		this.Patient_id = Patient_id;
 	}
 	
 	public int getId() {
@@ -52,15 +52,15 @@ public class Buy {
 	public void setPrize(float prize) {
 		this.prize = prize;
 	}
-	public Patient getIdPatient() {
-		return idPatient;
+	public User getPatient_id() {
+		return Patient_id;
 	}
-	public void setIdPatient(Patient idPatient) {
-		this.idPatient = idPatient;
+	public void setPatient_id(User idPatient) {
+		this.Patient_id = idPatient;
 	}
 	
 	@Override
 	public String toString() {
-		return "Buy [id=" + id + ", date=" + date + ", prize=" + prize + ", idPatient=" + idPatient + "]";
+		return "Buy [id=" + id + ", date=" + date + ", prize=" + prize + ", idPatient=" + Patient_id + "]";
 	}
 }

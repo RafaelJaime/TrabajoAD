@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.medicos.service.LoginService;
 import com.medicos.service.UserService;
 
 @Configuration
@@ -16,7 +17,7 @@ import com.medicos.service.UserService;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	private UserService userDetailsService;
+	private LoginService loginDetailsService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcrypt;
@@ -29,20 +30,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-    	auth.userDetailsService(userDetailsService).passwordEncoder(bcrypt);
+    	auth.userDetailsService(loginDetailsService).passwordEncoder(bcrypt);
     }
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http
     		.authorizeRequests()
-    		.antMatchers("/", "/contact", "/about", "/build/**", "/dist/**", "/images/**", "/docs/**", "/logo/**",
+    		.antMatchers("/","/contact", "/about", "/build/**", "/dist/**", "/images/**", "/docs/**", "/logo/**",
                     "/pages/**", "/plugins/**", "/register/**","/process_register/**")
             .permitAll()
-            .antMatchers("/medic/**").hasAnyRole("ADMIN").antMatchers("/medicine/****")
-            .hasAnyRole("ADMIN").antMatchers("/patient/**").hasAnyRole("ADMIN").anyRequest().authenticated()
-    		.and()
+            .antMatchers("/medic/**").hasAnyRole("ROLE_ADMIN")
+            .antMatchers("/medicine/**").hasAnyRole("ROLE_ADMIN")
+            .antMatchers("/patient/**").hasAnyRole("ROLE_ADMIN")
+            .anyRequest().authenticated()
+    		.and()    		
     		.formLogin()
+    		.loginPage("/login").permitAll()
     		.and()
     		.httpBasic();
     }

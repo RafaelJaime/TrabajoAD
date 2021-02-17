@@ -17,10 +17,10 @@ public class MedicalAppointment {
 	private int id;
 	
 	@ManyToOne
-	private Patient patient;
+	private User patient;
 	
 	@ManyToOne
-	private Medico medic;
+	private User medic;
 	
 	@Column
 	private Date date;
@@ -30,7 +30,7 @@ public class MedicalAppointment {
 	
 	public MedicalAppointment() {}
 	
-	public MedicalAppointment(int id, Patient patient, Medico medic, Date date, String observations) {
+	public MedicalAppointment(int id, User patient, User medic, Date date, String observations) {
 		super();
 		this.id = id;
 		this.patient = patient;
@@ -45,16 +45,16 @@ public class MedicalAppointment {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Patient getPatient() {
+	public User getPatient() {
 		return patient;
 	}
-	public void setPatient(Patient patient) {
+	public void setPatient(User patient) {
 		this.patient = patient;
 	}
-	public Medico getMedic() {
+	public User getMedic() {
 		return medic;
 	}
-	public void setMedic(Medico medic) {
+	public void setMedic(User medic) {
 		this.medic = medic;
 	}
 	public Date getDate() {

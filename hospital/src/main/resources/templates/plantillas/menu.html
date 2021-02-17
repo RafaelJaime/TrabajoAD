@@ -18,7 +18,7 @@
 					class="img-circle elevation-2" alt="User Image">
 				<div sec:authorize="isAuthenticated()" class="info">
 					<form th:action="@{/logout}" method="post">
-						<input type="submit" value="Logout" class="d-block" />
+						<input type="submit" value="Logout" class="btn btn-danger" />
 					</form>
 				</div>
 				<div sec:authorize="isAnonymous()" class="info">
@@ -29,9 +29,6 @@
 				<a href="" class="d-block"></a>
 			</div>
 		</div>
-		<ul class="nav nav-pills nav-sidebar flex-column">
-		<li class="nav-header" sec:authorize="isAuthenticated()">Logged as:<br> <span sec:authentication="principal.authorities"></span></li>
-		</ul>
 		<!-- SidebarSearch Form -->
 		<div class="form-inline">
 			<div class="input-group" data-widget="sidebar-search">

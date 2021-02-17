@@ -11,40 +11,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.medicos.interfaceService.IMedicoService;
-import com.medicos.model.Medico;
+import com.medicos.interfaceService.IUserService;
+import com.medicos.model.User;
 
 @Controller
 @RequestMapping("/medic")
 public class MedicController {
 	
 	@Autowired
-	private IMedicoService service;
+	private IUserService service;
+	
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<Medico> medicos=service.list();
+		List<User> medicos=service.findByRole("ROLE_MEDIC");
 		model.addAttribute("medicos",medicos);
 		return "Medic/Medicindex";
 	}
 	
 	@GetMapping("/new")
 	public String add(Model model) {
-		model.addAttribute("medico",new Medico());
+		model.addAttribute("medico",new User());
 		return "Medic/Medicform";
 	}
 	
 	@PostMapping("/save")
-	public String save(Medico m,Model model) {
+	public String save(User m,Model model) {
+		m.setRole("ROLE_MEDIC");
 		service.save(m);
 		return "redirect:/medic/list";
 	}
 	
 	@GetMapping("/modify/{id}")
 	public String modify(@PathVariable int id, Model model) {
-		Optional <Medico> medico=service.listId(id);
+		Optional <User> medico=service.listId(id);
 		model.addAttribute("medico",medico);
-		return "Medic/Medicform";
+		return "Medic/MedicformMod";
 	}
 	
 	@GetMapping("/delete/{id}")
