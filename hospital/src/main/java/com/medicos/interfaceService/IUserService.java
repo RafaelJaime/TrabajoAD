@@ -13,4 +13,5 @@ public interface IUserService {
 	 public int save(User u);
 	 public void delete(int id);
 	 List<User> findByRole(String role);
+	 User findByName(String name);
 }

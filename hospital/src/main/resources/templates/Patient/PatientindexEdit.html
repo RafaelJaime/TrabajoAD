@@ -10,7 +10,7 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">Welcome</h1>
+							<h1 class="m-0">Patient</h1>
 						</div>
 					</div>
 				</div>
@@ -21,12 +21,40 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Profile</h5>
+									<h5 class="card-title">Patients</h5>
 								</div>
 								<div class="card-body">
 									<div class="row">
-											<br>
-										<h1>Hola mamis mi Laura ha perdido su mochila en el cole si alguien la encuentra me komunikais</h1>
+										<table class="table">
+											<thead>
+												<tr>
+
+													<td>ID</td>
+													<td>NAME</td>
+													<td>SURNAME</td>
+													<td>AGE</td>
+													<td>DIRECTION</td>
+													<td>FIRSTNAME</td>
+													<td>ACTIONS</td>
+
+												</tr>
+											</thead>
+
+											<tbody th:each="patient:${patients}">
+												<tr>
+
+													<td th:text="${patient.id}"></td>
+													<td th:text="${patient.name}"></td>
+													<td th:text="${patient.surname}"></td>
+													<td th:text="${patient.age}"></td>
+													<td th:text="${patient.direction}"></td>
+													<td th:text="${patient.firstname}"></td>
+													<td><a th:href="@{/patient/modifyEdit/}+${patient.id}"
+														class="btn btn-warning">Modify</a></td>
+
+												</tr>
+											</tbody>
+										</table>
 									</div>
 
 								</div>

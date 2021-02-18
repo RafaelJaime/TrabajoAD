@@ -27,12 +27,13 @@ public class MainController {
 	@Autowired
 	private IUser usuario;
 	
+	@Autowired
+	private IUser repository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	@GetMapping("")
-	public String welcomeClient() {
-		return "client";
-		
-	}
-	@GetMapping("admin")
 	public String welcome(@RequestParam(required = false) String filter, Model model) {
 		List<User> listMedic = user.list();
 		if (filter != null) {
@@ -48,10 +49,14 @@ public class MainController {
 		model.addAttribute("listMedic", listMedic);
 		return "index";
 	}
+	
+
+	
 	@GetMapping("/about")
 	public String about() {
 		return "general/about";
 	}
+	
 	@GetMapping("/contact")
 	public String contact() {
 		return "general/contact";
@@ -69,12 +74,6 @@ public class MainController {
         model.addAttribute("user", new User());
         return "User/register";
     }
-	
-	@Autowired
-	private IUser repository;
-	
-	@Autowired
-	private BCryptPasswordEncoder encoder;
 	
 	@PostMapping("/process_register")
 	public String processRegister(User user) {

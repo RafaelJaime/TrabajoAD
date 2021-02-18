@@ -40,9 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     		.antMatchers("/","/contact", "/about", "/build/**", "/dist/**", "/images/**", "/docs/**", "/logo/**",
                     "/pages/**", "/plugins/**", "/register/**","/process_register/**")
             .permitAll()
-            .antMatchers("/medic/**").hasAnyRole("ROLE_ADMIN")
-            .antMatchers("/medicine/**").hasAnyRole("ROLE_ADMIN")
-            .antMatchers("/patient/**").hasAnyRole("ROLE_ADMIN")
+//            .antMatchers("/medic/**").hasAnyRole("ROLE_ADMIN")
+//            .antMatchers("/medicine/**").hasAnyRole("ROLE_ADMIN")
+//            .antMatchers("/patient/**").hasAnyRole("ROLE_ADMIN")
             .anyRequest().authenticated()
     		.and()    		
     		.formLogin()
