@@ -51,6 +51,7 @@ public class PatientController {
 	@PostMapping("/saveAdd")
 	public String saveAdd(User m,Model model) {
 		m.setRole("ROLE_PATIENT");
+		m.setPassword(encoder.encode(m.getPassword()));
 		service.save(m);
 		return "redirect:/patient/list";
 	}
@@ -64,8 +65,6 @@ public class PatientController {
 		oldUser.setAge(m.getAge());
 		oldUser.setDirection(m.getDirection());
 		oldUser.setFirstname(m.getFirstname());
-		if(!(m.getPassword()==null))
-			oldUser.setPassword(encoder.encode(m.getPassword()));
 		service.save(oldUser);
 		return "redirect:/patient/list";
 	}
@@ -78,8 +77,7 @@ public class PatientController {
 		oldUser.setSurname(m.getSurname());
 		oldUser.setAge(m.getAge());
 		oldUser.setDirection(m.getDirection());
-		if(!(m.getPassword()==null))
-			oldUser.setPassword(encoder.encode(m.getPassword()));
+		oldUser.setFirstname(m.getFirstname());
 		service.save(oldUser);
 		return "redirect:/patient/edit";
 	}
@@ -96,6 +94,21 @@ public class PatientController {
 		Optional <User> patient=service.listId(id);
 		model.addAttribute("patient",patient);
 		return "Patient/Patientform";
+	}
+	
+	@GetMapping("/password/{id}")
+	public String password(@PathVariable int id, Model model) {
+		Optional <User> patient=service.listId(id);
+		model.addAttribute("patient",patient);
+		return "Patient/PatientformPassword";
+	}
+	
+	@PostMapping("/passwordChange")
+	public String passwordChange(User m,Model model) {
+		User oldUser = service.findByName(m.getName());
+		oldUser.setPassword(encoder.encode(m.getPassword()));
+		service.save(oldUser);
+		return "redirect:/patient/edit";
 	}
 	
 	@GetMapping("/delete/{id}")

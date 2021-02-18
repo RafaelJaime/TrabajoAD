@@ -49,7 +49,8 @@
 													<td th:text="${patient.age}"></td>
 													<td th:text="${patient.direction}"></td>
 													<td th:text="${patient.firstname}"></td>
-													<td><a th:href="@{/patient/modifyEdit/}+${patient.id}"
+													<td><a th:href="@{/patient/password/}+${patient.id}"
+														class="btn btn-info">Change Password</a> | <a th:href="@{/patient/modifyEdit/}+${patient.id}"
 														class="btn btn-warning">Modify</a></td>
 
 												</tr>
