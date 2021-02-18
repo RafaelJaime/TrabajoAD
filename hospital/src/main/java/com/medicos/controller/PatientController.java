@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,16 @@ public class PatientController {
 	@Autowired
 	private IUserService service;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	@GetMapping("/edit")
+	public String edit(Model model) {
+		User patients=service.findByName(((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+		model.addAttribute("patients",patients);
+		return "Patient/PatientindexEdit";	
+	}
+	
 	@GetMapping("/list")
 	public String list(Model model) {
 		List<User> patients=service.findByRole("ROLE_PATIENT");
@@ -32,14 +45,50 @@ public class PatientController {
 	@GetMapping("/new")
 	public String add(Model model) {
 		model.addAttribute("patient",new User());
-		return "Patient/Patientform";
+		return "Patient/PatientformAdd";
+	}
+	
+	@PostMapping("/saveAdd")
+	public String saveAdd(User m,Model model) {
+		m.setRole("ROLE_PATIENT");
+		service.save(m);
+		return "redirect:/patient/list";
 	}
 	
 	@PostMapping("/save")
 	public String save(User m,Model model) {
 		m.setRole("ROLE_PATIENT");
-		service.save(m);
+		User oldUser = service.findByName(m.getName());
+		oldUser.setName(m.getName());
+		oldUser.setSurname(m.getSurname());
+		oldUser.setAge(m.getAge());
+		oldUser.setDirection(m.getDirection());
+		oldUser.setFirstname(m.getFirstname());
+		if(!(m.getPassword()==null))
+			oldUser.setPassword(encoder.encode(m.getPassword()));
+		service.save(oldUser);
 		return "redirect:/patient/list";
+	}
+	
+	@PostMapping("/saveEdit")
+	public String saveEdit(User m,Model model) {
+		m.setRole("ROLE_PATIENT");
+		User oldUser = service.findByName(m.getName());
+		oldUser.setName(m.getName());
+		oldUser.setSurname(m.getSurname());
+		oldUser.setAge(m.getAge());
+		oldUser.setDirection(m.getDirection());
+		if(!(m.getPassword()==null))
+			oldUser.setPassword(encoder.encode(m.getPassword()));
+		service.save(oldUser);
+		return "redirect:/patient/edit";
+	}
+	
+	@GetMapping("/modifyEdit/{id}")
+	public String modifyEdit(@PathVariable int id, Model model) {
+		Optional <User> patient=service.listId(id);
+		model.addAttribute("patient",patient);
+		return "Patient/PatientformEdit";
 	}
 	
 	@GetMapping("/modify/{id}")

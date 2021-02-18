@@ -46,4 +46,9 @@ public class UserService implements IUserService{
 		return (List<com.medicos.model.User>) data.findByRole(role);
 	}
 
+	@Override
+	public com.medicos.model.User findByName(String name) {
+		return data.findByName(name);
+	}
+
 }
