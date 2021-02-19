@@ -12,17 +12,21 @@ import org.springframework.stereotype.Service;
 
 import com.medicos.interfaceService.IMedicAppoService;
 import com.medicos.interfaces.IMedicalAppointment;
-import com.medicos.interfaces.IMedicine;
 import com.medicos.model.MedicalAppointment;
+
 @Service
 public class MedicAppointmentService implements IMedicAppoService {
+	
 	@Autowired
 	private IMedicalAppointment data;
 	
 	@Override
-	public List<MedicalAppointment> findNoDescription() {
-		
-		return null;
+	public int save(MedicalAppointment u) {
+		int res = 0;
+		MedicalAppointment user = data.save(u);
+		if (!user.equals(null))
+			res = 1;
+		return res;
 	}
 
 }

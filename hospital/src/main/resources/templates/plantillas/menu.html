@@ -63,6 +63,19 @@
 				</a></li>
 			</ul>
 			<ul class="nav nav-pills nav-sidebar flex-column"
+				sec:authorize="isAuthenticated()" data-widget="treeview" role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li class="nav-header">User menu</li>
+				<li class="nav-item"><a href="/patient/list" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
+						<p>
+							My Profile
+						</p>
+				</a></li>
+			</ul>
+			<ul class="nav nav-pills nav-sidebar flex-column"
 				sec:authorize="hasRole('ADMIN')" data-widget="treeview" role="menu"
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
@@ -84,6 +97,38 @@
 						<i class="nav-icon far fa-calendar-alt"></i>
 						<p>
 							Medicines
+						</p>
+				</a></li>
+			</ul>
+			<ul class="nav nav-pills nav-sidebar flex-column"
+				sec:authorize="hasRole('MEDIC')" data-widget="treeview" role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li class="nav-header">Medic menu</li>
+				<li class="nav-item"><a href="/medicalAppointment" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
+						<p>
+							Medic appointment
+						</p>
+				</a></li>
+				<li class="nav-item"><a href="/medicalAppointment/patient" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
+						<p>
+							Patients
+						</p>
+				</a></li>
+			</ul>
+			<ul class="nav nav-pills nav-sidebar flex-column"
+				sec:authorize="hasRole('PATIENT')" data-widget="treeview" role="menu"
+				data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li class="nav-header">Patient menu</li>
+				<li class="nav-item"><a href="/PatientAppointment" class="nav-link">
+						<i class="nav-icon far fa-calendar-alt"></i>
+						<p>
+							Medic appointment
 						</p>
 				</a></li>
 			</ul>

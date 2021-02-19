@@ -124,6 +124,8 @@ public class User {
 		setRole("ROLE_USER");
 	}
 	
-	
+	public String fullName() {
+		return this.firstname + " " + this.surname;
+	}
 
 }

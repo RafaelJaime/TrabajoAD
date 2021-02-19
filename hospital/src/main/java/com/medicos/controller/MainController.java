@@ -35,12 +35,13 @@ public class MainController {
 	
 	@GetMapping("")
 	public String welcome(@RequestParam(required = false) String filter, Model model) {
-		List<User> listMedic = user.list();
-		if (filter != null) {
+		List<User> listMedic = user.listMedics();
+		if (filter != null && !filter.isEmpty()) {
 			List<User> listMedic2 = new ArrayList<User>();
 			for (User medico : listMedic) {
-				if (medico.getSpecialty().equals(filter)) {
-					listMedic2.add(medico);
+				if (medico.getSpecialty() != null) {
+					if (medico.getSpecialty().equals(filter))
+						listMedic2.add(medico);
 				}
 			}
 			model.addAttribute("listMedic", listMedic2);

@@ -9,6 +9,8 @@ import com.medicos.model.User;
 
 public interface IUserService {
 	 public List<User>list();
+	 public List<User>listMedics();
+	 public List<User>listPatients();
 	 public Optional<User>listId(int id);
 	 public int save(User u);
 	 public void delete(int id);

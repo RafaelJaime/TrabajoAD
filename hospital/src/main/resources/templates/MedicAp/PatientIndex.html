@@ -10,7 +10,7 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">Medics appointments</h1>
+							<h1 class="m-0">Medics Appointment</h1>
 						</div>
 					</div>
 				</div>
@@ -21,26 +21,30 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title">Medics Appointment</h5>
+									<h5 class="card-title">Patients</h5>
 								</div>
 								<div class="card-body">
 									<div class="row">
-											<br>
 										<table class="table">
 											<thead>
 												<tr>
-													<td>Date</td>
-													<td>Patient</td>
-													<td>Actions</td>
+													<td>NAME</td>
+													<td>SURNAME</td>
+													<td>AGE</td>
+													<td>DIRECTION</td>
+													<td>ACTIONS</td>
 												</tr>
 											</thead>
 
-											<tbody th:each="medico:${medicap}">
+											<tbody th:each="patient:${patients}">
 												<tr>
-													<td th:text="${medico.date}"></td>
-													<td th:text="${medico.patient.fullName()}"></td>
-													<td><a th:href="@{/medicalAppointment/}+${medico.id}"
-														class="btn btn-warning">Specify Treatments</a></td>
+													<td th:text="${patient.firstname}"></td>
+													<td th:text="${patient.surname}"></td>
+													<td th:text="${patient.age}"></td>
+													<td th:text="${patient.direction}"></td>
+													<td><a th:href="@{/medicalAppointment/patient/}+${patient.id}"
+														class="btn btn-warning">View medical appointment</a></td>
+
 												</tr>
 											</tbody>
 										</table>

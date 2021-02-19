@@ -10,7 +10,7 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">Medics appointments</h1>
+							<h1 class="m-0">Patient History</h1>
 						</div>
 					</div>
 				</div>
@@ -31,7 +31,8 @@
 												<tr>
 													<td>Date</td>
 													<td>Patient</td>
-													<td>Actions</td>
+													<td>Doctor</td>
+													<td>Observations</td>
 												</tr>
 											</thead>
 
@@ -39,8 +40,8 @@
 												<tr>
 													<td th:text="${medico.date}"></td>
 													<td th:text="${medico.patient.fullName()}"></td>
-													<td><a th:href="@{/medicalAppointment/}+${medico.id}"
-														class="btn btn-warning">Specify Treatments</a></td>
+													<td th:text="${medico.medic.fullName()}"></td>
+													<td th:text="${medico.observations}"></td>
 												</tr>
 											</tbody>
 										</table>

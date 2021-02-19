@@ -21,6 +21,14 @@ public class UserService implements IUserService{
 		// TODO Auto-generated method stub
 		return (List<com.medicos.model.User>) data.findAll();
 	}
+	@Override
+	public List<com.medicos.model.User> listMedics() {
+		return (List<com.medicos.model.User>) data.findByRole("MEDIC");
+	}
+	@Override
+	public List<com.medicos.model.User> listPatients() {
+		return (List<com.medicos.model.User>) data.findByRole("PATIENT");
+	}
 
 	@Override
 	public Optional<com.medicos.model.User> listId(int id) {
@@ -50,5 +58,4 @@ public class UserService implements IUserService{
 	public com.medicos.model.User findByName(String name) {
 		return data.findByName(name);
 	}
-
 }
