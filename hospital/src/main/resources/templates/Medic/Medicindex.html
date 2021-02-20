@@ -38,7 +38,7 @@
 													<td>AGE</td>
 													<td>HIRE DATE</td>
 													<td>SPECIALTY</td>
-													<td>USERNAME</td>
+													<td>FIRST NAME</td>
 													<td>ACTIONS</td>
 
 												</tr>
@@ -53,7 +53,7 @@
 													<td th:text="${medico.age}"></td>
 													<td th:text="${medico.date}"></td>
 													<td th:text="${medico.specialty}"></td>
-													<td th:text="${medico.username}"></td>
+													<td th:text="${medico.firstname}"></td>
 													<td><a th:href="@{/medic/modify/}+${medico.id}"
 														class="btn btn-warning">Modify</a> <a
 														th:href="@{/medic/delete/}+${medico.id}"

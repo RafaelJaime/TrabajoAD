@@ -40,4 +40,9 @@ public class MedicineService implements IMedicineService{
 	public void delete(int id) {
 		data.deleteById(id);
 	}
+
+	@Override
+	public Medicine findByName(String name) {
+		return data.findByName(name);
+	}
 }

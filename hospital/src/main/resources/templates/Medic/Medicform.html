@@ -7,7 +7,7 @@
 </head>
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/medic/save}" th:object=${medico} method="post">
+			<form th:action="@{/medic/saveAdd}" th:object=${medico} method="post">
 				<div class="card">
 					<div class="card-header">
 						<h3>Medic Model</h3>
@@ -36,8 +36,8 @@
 				            </select>
 						</div>
 						<div class="form-group">
-							<label>USERNAME</label>
-							<input th:field="*{username}" type="text" class="form-control"/>
+							<label>FIRST NAME</label>
+							<input th:field="*{firstname}" type="text" class="form-control"/>
 						</div>
 						<div class="form-group">
 							<label>PASSWORD</label>

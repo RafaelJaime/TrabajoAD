@@ -68,7 +68,7 @@
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 				<li class="nav-header">User menu</li>
-				<li class="nav-item"><a href="/patient/list" class="nav-link">
+				<li class="nav-item"><a href="/patient/edit" class="nav-link">
 						<i class="nav-icon far fa-calendar-alt"></i>
 						<p>
 							My Profile
@@ -101,7 +101,7 @@
 				</a></li>
 			</ul>
 			<ul class="nav nav-pills nav-sidebar flex-column"
-				sec:authorize="hasRole('MEDIC')" data-widget="treeview" role="menu"
+				sec:authorize="hasRole('ROLE_MEDIC')" data-widget="treeview" role="menu"
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -119,8 +119,9 @@
 						</p>
 				</a></li>
 			</ul>
+			<div></div>
 			<ul class="nav nav-pills nav-sidebar flex-column"
-				sec:authorize="hasRole('PATIENT')" data-widget="treeview" role="menu"
+				sec:authorize="hasRole('ROLE_PATIENT')" data-widget="treeview" role="menu"
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->

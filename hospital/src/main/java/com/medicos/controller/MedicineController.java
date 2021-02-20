@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.medicos.interfaceService.IMedicineService;
 import com.medicos.model.Medicine;
+import com.medicos.model.User;
 
 @Controller
 @RequestMapping("/medicine")
@@ -39,11 +40,23 @@ public class MedicineController {
 		return "redirect:/medicine/list";
 	}
 	
+	@PostMapping("/saveEdit")
+	public String saveEdit(Medicine m,Model model) {
+		Medicine oldMedicine = service.findByName(m.getName());
+		oldMedicine.setName(m.getName());
+		oldMedicine.setDescription(m.getDescription());
+		oldMedicine.setPrescription(m.getPrescription());
+		oldMedicine.setPrice(m.getPrice());
+		oldMedicine.setStock(m.getStock());
+		service.save(oldMedicine);
+		return "redirect:/medicine/list";
+	}
+	
 	@GetMapping("/modify/{id}")
 	public String modify(@PathVariable int id, Model model) {
 		Optional <Medicine> medicine=service.listId(id);
 		model.addAttribute("medicine",medicine);
-		return "Medicine/Medicineform";
+		return "Medicine/MedicineformMod";
 	}
 	
 	@GetMapping("/delete/{id}")

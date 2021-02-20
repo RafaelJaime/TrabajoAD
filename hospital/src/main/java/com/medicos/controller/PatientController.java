@@ -60,6 +60,7 @@ public class PatientController {
 	public String save(User m,Model model) {
 		m.setRole("ROLE_PATIENT");
 		User oldUser = service.findByName(m.getName());
+		System.out.println();
 		oldUser.setName(m.getName());
 		oldUser.setSurname(m.getSurname());
 		oldUser.setAge(m.getAge());
