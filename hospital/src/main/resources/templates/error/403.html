@@ -6,6 +6,7 @@
 		<nav th:replace="plantillas/base.html :: headboard"></nav>
 		<aside th:replace="plantillas/base.html :: menu"></aside>
 		<div class="content-wrapper">
+			<div th:replace="plantillas/base.html :: messages"></div>
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<div class="container-fluid">
@@ -30,9 +31,8 @@
 						</h3>
 
 						<p>
-							You are note authorized to see this page. Meanwhile, you
-							may <a href="/">return to dashboard</a> or try
-							using the search form.
+							You are note authorized to see this page. Meanwhile, you may <a
+								href="/">return to dashboard</a> or try using the search form.
 						</p>
 
 						<form class="search-form">

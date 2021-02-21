@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IUserService;
 import com.medicos.model.Buy;
@@ -118,15 +119,16 @@ public class PatientController {
 	}
 	
 	@PostMapping("/saveAdd")
-	public String saveAdd(User m,Model model) {
+	public String saveAdd(User m,Model model, RedirectAttributes flash) {
 		m.setRole("PATIENT");
 		m.setPassword(encoder.encode(m.getPassword()));
 		service.save(m);
+		flash.addFlashAttribute("success", "Patient saved successfully.");
 		return "redirect:/patient/list";
 	}
 	
 	@PostMapping("/save")
-	public String save(User m,Model model) {
+	public String save(User m,Model model, RedirectAttributes flash) {
 		m.setRole("PATIENT");
 		User oldUser = service.findByName(m.getName());
 		System.out.println();
@@ -136,11 +138,12 @@ public class PatientController {
 		oldUser.setDirection(m.getDirection());
 		oldUser.setFirstname(m.getFirstname());
 		service.save(oldUser);
+		flash.addFlashAttribute("success", "Patient saved successfully.");
 		return "redirect:/patient/list";
 	}
 	
 	@PostMapping("/saveEdit")
-	public String saveEdit(User m,Model model) {
+	public String saveEdit(User m,Model model, RedirectAttributes flash) {
 		m.setRole("PATIENT");
 		User oldUser = service.findByName(m.getName());
 		oldUser.setName(m.getName());
@@ -149,6 +152,7 @@ public class PatientController {
 		oldUser.setDirection(m.getDirection());
 		oldUser.setFirstname(m.getFirstname());
 		service.save(oldUser);
+		flash.addFlashAttribute("success", "Patient saved successfully.");
 		return "redirect:/patient/edit";
 	}
 	
@@ -174,10 +178,11 @@ public class PatientController {
 	}
 	
 	@PostMapping("/passwordChange")
-	public String passwordChange(User m,Model model) {
+	public String passwordChange(User m,Model model, RedirectAttributes flash) {
 		User oldUser = service.findByName(m.getName());
 		oldUser.setPassword(encoder.encode(m.getPassword()));
 		service.save(oldUser);
+		flash.addFlashAttribute("success", "Patient saved successfully.");
 		return "redirect:/patient/edit";
 	}
 	

@@ -17,6 +17,7 @@
 			</div>
 			<section class="content">
 				<div class="container-fluid">
+				<div th:replace="plantillas/base.html :: messages"></div>
 					<div class="row">
 						<div class="col-md-12">
 							<form th:action="@{/patients/medicalAppointment}"
