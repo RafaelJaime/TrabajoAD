@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantillas/base.html :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="plantillas/base.html :: headboard"></nav>
+		<aside th:replace="plantillas/base.html :: menu"></aside>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0">Medics appointments</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Medics Appointment</h5>
+								</div>
+								<div class="card-body">
+									<div class="row">
+											<br>
+										<table class="table">
+											<thead>
+												<tr>
+													<td>Date</td>
+													<td>Patient</td>
+												</tr>
+											</thead>
+
+											<tbody th:each="medico:${medicap}">
+												<tr>
+													<td th:text="${medico.date}"></td>
+													<td th:text="${medico.patient.fullName()}"></td>
+													
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer th:replace="plantillas/base.html :: footer"></footer>
+	</div>
+	<div th:replace="plantillas/base.html :: js"></div>
+</body>
+</html>
