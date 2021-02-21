@@ -1,5 +1,6 @@
 package com.medicos.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,25 +51,50 @@ public class PatientController {
 	
 	private com.medicos.model.User user;
 	
-	@ModelAttribute("cart")
-	public List<Medicine> medicineCart(){
-		List<Integer> content=(List<Integer>) session.getAttribute("cart");
-		return (content == null) ? null : medicineService.findById(234);
-	}
 	
-	@ModelAttribute("total_cart")
-	public Double totalCart(){
-		List<Medicine> content=medicineCart();
-		if (content != null)
-			return content.stream().mapToDouble(p -> p.getPrice()).sum();
-		return 0.0;
-	}
+//	@ModelAttribute("cart")
+//	public List<Medicine> medicineCart(){
+//		@SuppressWarnings("unchecked")
+//		List<Integer> content=(List<Integer>) session.getAttribute("cart");
+//		return (content == null) ? null : medicineService.findById(234);
+//	}
+	
+//	@ModelAttribute("total_cart")
+//	public Double totalCart(){
+//		List<Medicine> content=medicineCart();
+//		if (content != null)
+//			return content.stream().mapToDouble(p -> p.getPrice()).sum();
+//		return 0.0;
+//	}
 	
 	@ModelAttribute("my_content")
 	public Optional<Buy> myContent(){
 		String name = SecurityContextHolder.getContext().getAuthentication().getName();
 		user = userService.findByName(name);
 		return buyService.findById(user.getId());
+	}
+	
+	@GetMapping("/cart/add/{id}")
+	public String addCart(Model model, @PathVariable Long id) {
+		List<Long>content = (List<Long>) session.getAttribute("cart");
+		if (content==null)
+				content= new ArrayList<>();
+		if(!content.contains(id))
+			content.add(id);
+		session.setAttribute("cart",content);
+		return "redirect:/MedicAp/carro1";
+	}
+	
+	@GetMapping("/cart/delete/{id}")
+	public String deleteCart(Model model, @PathVariable Long id) {
+		List<Long>content = (List<Long>) session.getAttribute("cart");
+		if (content==null)
+				return "redirect:/index";
+		if(content.isEmpty())
+			session.removeAttribute("cart");
+		else
+			session.setAttribute("cart",content);
+		return "redirect:/MedicAp/carro1";
 	}
 	
 	@GetMapping("/edit")
@@ -93,7 +119,7 @@ public class PatientController {
 	
 	@PostMapping("/saveAdd")
 	public String saveAdd(User m,Model model) {
-		m.setRole("ROLE_PATIENT");
+		m.setRole("PATIENT");
 		m.setPassword(encoder.encode(m.getPassword()));
 		service.save(m);
 		return "redirect:/patient/list";
@@ -101,7 +127,7 @@ public class PatientController {
 	
 	@PostMapping("/save")
 	public String save(User m,Model model) {
-		m.setRole("ROLE_PATIENT");
+		m.setRole("PATIENT");
 		User oldUser = service.findByName(m.getName());
 		System.out.println();
 		oldUser.setName(m.getName());
@@ -115,7 +141,7 @@ public class PatientController {
 	
 	@PostMapping("/saveEdit")
 	public String saveEdit(User m,Model model) {
-		m.setRole("ROLE_PATIENT");
+		m.setRole("PATIENT");
 		User oldUser = service.findByName(m.getName());
 		oldUser.setName(m.getName());
 		oldUser.setSurname(m.getSurname());

@@ -42,7 +42,12 @@ public class MedicineService implements IMedicineService{
 	}
 
 	@Override
-	public List<Medicine> findById(int id) {
-		return (List<Medicine>) data.findById(id);
+	public Optional<Medicine> findById(int id) {
+		return data.findById(id);
 	}
+
+//	@Override
+//	public List<Medicine> findById(int id) {
+//		return (List<Medicine>) data.findById(id);
+//	}
 }

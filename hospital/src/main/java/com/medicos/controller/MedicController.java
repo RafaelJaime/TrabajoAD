@@ -31,12 +31,12 @@ public class MedicController {
 	public String edit(Model model) {
 		User medicos=service.findByName(((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
 		model.addAttribute("medicos",medicos);
-		return "Medic/MedicindexEdit";	
+		return "Medic/MedicindexEdit";
 	}
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<User> medicos=service.findByRole("ROLE_MEDIC");
+		List<User> medicos=service.findByRole("MEDIC");
 		model.addAttribute("medicos",medicos);
 		return "Medic/Medicindex";
 	}
@@ -49,7 +49,7 @@ public class MedicController {
 	
 	@PostMapping("/saveAdd")
 	public String saveAdd(User m,Model model) {
-		m.setRole("ROLE_MEDIC");
+		m.setRole("MEDIC");
 		m.setPassword(encoder.encode(m.getPassword()));
 		service.save(m);
 		return "redirect:/medic/list";
@@ -57,7 +57,7 @@ public class MedicController {
 	
 	@PostMapping("/save")
 	public String save(User m,Model model) {
-		m.setRole("ROLE_MEDIC");
+		m.setRole("MEDIC");
 		User oldUser = service.findByName(m.getName());
 		oldUser.setName(m.getName());
 		oldUser.setSurname(m.getSurname());

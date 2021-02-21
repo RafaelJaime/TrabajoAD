@@ -11,5 +11,5 @@ public interface IMedicineService {
 	 public int save(Medicine m);
 	 public void delete(int id);
 	 Medicine findByName(String name);
-	 public List<Medicine> findById(int id);
+	 public Optional<Medicine> findById(int id);
 }

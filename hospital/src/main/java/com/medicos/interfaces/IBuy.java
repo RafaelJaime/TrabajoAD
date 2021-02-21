@@ -11,6 +11,6 @@ import com.medicos.model.User;
 @Repository
 public interface IBuy extends JpaRepository<Buy, Integer>{
 		
-	List<Buy> findBypatient_id_id(User patient);
+	List<Buy> findById(User patient);
 	
 }

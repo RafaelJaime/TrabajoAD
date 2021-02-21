@@ -54,7 +54,7 @@ public class MedicineController {
 	
 	@GetMapping("/modify/{id}")
 	public String modify(@PathVariable int id, Model model) {
-		List <Medicine> medicine=service.findById(id);
+		Optional<Medicine> medicine=service.findById(id);
 		model.addAttribute("medicine",medicine);
 		return "Medicine/MedicineformMod";
 	}
