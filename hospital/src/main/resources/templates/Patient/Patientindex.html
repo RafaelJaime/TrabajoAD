@@ -17,7 +17,7 @@
 			</div>
 			<section class="content">
 				<div class="container-fluid">
-				<div th:replace="plantillas/base.html :: messages"></div>
+					<div th:replace="plantillas/base.html :: messages"></div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
@@ -51,14 +51,36 @@
 													<td th:text="${patient.surname}"></td>
 													<td th:text="${patient.age}"></td>
 													<td th:text="${patient.direction}"></td>
-													<td>
-														
-														<a th:href="@{/patient/modify/}+${patient.id}"
-														class="btn btn-warning">Modify</a>
-														<a th:href="@{/patient/delete/}+${patient.id}"
-														class="btn btn-danger">Delete</a>
-													</td>
-
+													<td><a th:href="@{/patient/modify/}+${patient.id}"
+														class="btn btn-warning">Modify</a> <a
+														th:href="@{/patient/delete/}+${patient.id}"
+														class="btn btn-danger" data-toggle="modal"
+														data-target="#modal-default">Delete</a></td>
+													<div class="modal fade" id="modal-default">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h4 class="modal-title">Default Modal</h4>
+																	<button type="button" class="close"
+																		data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<p>One fine body&hellip;</p>
+																</div>
+																<div class="modal-footer justify-content-between">
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">Close</button>
+																	<a th:href="@{/patient/delete/}+${patient.id}"
+																		class="btn btn-danger">Delete patient</a>
+																</div>
+															</div>
+															<!-- /.modal-content -->
+														</div>
+														<!-- /.modal-dialog -->
+													</div>
+													<!-- /.modal -->
 												</tr>
 											</tbody>
 										</table>

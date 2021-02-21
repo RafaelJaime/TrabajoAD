@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IMedicineService;
@@ -68,13 +69,17 @@ public class MedicineController {
 	}
 	
 	@PostMapping("/stock")
-	public String changeStock(Model model, int id, int stock, RedirectAttributes flash) {
-		System.out.println(id);
-		Optional<Medicine> medicina = service.findById(id);
-		Medicine medicin = medicina.get();
-		medicin.aumentarStock(stock);
-		service.save(medicin);
-		flash.addFlashAttribute("success", "Medicine daleted successfully.");
+	public String changeStock(Model model,@RequestParam int id,@RequestParam(required=false) Integer stock, RedirectAttributes flash) {
+		if (stock != null) {
+			Optional<Medicine> medicina = service.findById(id);
+			Medicine medicin = medicina.get();
+			medicin.aumentarStock(stock);
+			service.save(medicin);
+			flash.addFlashAttribute("success", "Stock added successfully.");
+		} else {
+			flash.addFlashAttribute("error", "Type the stock to add.");
+		}
+		
 		return "redirect:/medicine/list";
 	}
 }
