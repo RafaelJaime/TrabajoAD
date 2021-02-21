@@ -71,7 +71,7 @@ public class Patient_controller {
 		return "MedicAp/profile";
 	}
 	@PostMapping({"/Profile", "/profile"})
-	public String profileSave (User user,String password1, String password2, Model modelo, Principal principal) {
+	public String profileSave (User user, Model modelo, Principal principal) {
 		User usuario = service.findByName(principal.getName());
 		if (!user.getFirstname().isEmpty()) {
 			usuario.setFirstname(user.getFirstname());
@@ -85,9 +85,9 @@ public class Patient_controller {
 		if (!user.getDirection().isEmpty()) {
 			usuario.setDirection(user.getDirection());
 		}
-		if (encoder.matches(usuario.getPassword(), password1)) {
-			usuario.setPassword(encoder.encode(password2));
-		}
+		if (!user.getPassword().isEmpty()) {
+			usuario.setPassword(encoder.encode(user.getPassword()));
+        }
 		service.save(usuario);
 		System.out.println(usuario.toString());
 		modelo.addAttribute("usuario", usuario);

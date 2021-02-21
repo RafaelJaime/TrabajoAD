@@ -23,6 +23,7 @@
 								<div class="card-header">
 									<h5 class="card-title">Profile</h5>
 								</div>
+								<form th:action="@{/patients/profile}" method="get">
 								<div class="card-body">
 									<div class="row">
 										<div th:object=${usuario}>
@@ -47,10 +48,9 @@
 
 								</div>
 								<div class="card-footer" sec:authorize="hasRole('ROLE_PATIENT')">
-								<form th:action="@{/patients/profile}" method="get">
 									<input type="submit" value="Edit" class="btn btn-success" />
-									</form>
 								</div>
+								</form>
 							</div>
 						</div>
 					</div>

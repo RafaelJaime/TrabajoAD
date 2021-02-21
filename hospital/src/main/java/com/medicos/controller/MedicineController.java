@@ -68,7 +68,7 @@ public class MedicineController {
 	@PostMapping("/stock")
 	public String changeStock(Model model, int id, int stock) {
 		System.out.println(id);
-		Optional<Medicine> medicina = service.listId(id);
+		Optional<Medicine> medicina = service.findById(id);
 		Medicine medicin = medicina.get();
 		medicin.aumentarStock(stock);
 		service.save(medicin);
