@@ -32,7 +32,7 @@ public class MedicController {
 	public String edit(Model model) {
 		User medicos=service.findByName(((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
 		model.addAttribute("medicos",medicos);
-		return "Medic/MedicindexEdit";	
+		return "Medic/MedicindexEdit";
 	}
 	
 	@GetMapping("/list")

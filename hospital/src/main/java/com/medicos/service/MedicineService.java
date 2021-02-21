@@ -23,11 +23,6 @@ public class MedicineService implements IMedicineService{
 	}
 
 	@Override
-	public Optional<Medicine> listId(int id) {
-		return data.findById(id);
-	}
-
-	@Override
 	public int save(Medicine m) {
 		int res=0;
 		Medicine medicine=data.save(m);
@@ -45,4 +40,14 @@ public class MedicineService implements IMedicineService{
 	public Medicine findByName(String name) {
 		return data.findByName(name);
 	}
+
+	@Override
+	public Optional<Medicine> findById(int id) {
+		return data.findById(id);
+	}
+
+//	@Override
+//	public List<Medicine> findById(int id) {
+//		return (List<Medicine>) data.findById(id);
+//	}
 }
