@@ -1,5 +1,8 @@
 package com.medicos.interfaces;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +11,7 @@ import com.medicos.model.User;
 
 @Repository
 public interface IMedicine extends CrudRepository<Medicine, Integer>{
-	Medicine findByName(String name);
+	public Medicine findByName(String name);
+	@Query("SELECT m FROM Medicine m where stock > 0")
+	public List<Medicine> findWithStock();
 }

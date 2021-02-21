@@ -40,10 +40,18 @@ public class Medicine {
 		this.stock = stock;
 	}
 
-	public Medicine() {
-		super();
-	}
+	public Medicine() {}
 
+	public boolean sinExistencias() {
+		return this.stock<= 0;
+	}
+	public void aumentarStock(int numero) {
+		this.stock += numero;
+	}
+	public void reducirStock(int numero) {
+		this.stock-= numero;
+	}
+	
 	public int getId() {
 		return id;
 	}
