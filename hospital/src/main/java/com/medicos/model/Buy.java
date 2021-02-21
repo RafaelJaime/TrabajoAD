@@ -19,7 +19,7 @@ public class Buy {
 	private Date date;
 	
 	@Column
-	private float prize;
+	private float price;
 	
 	@ManyToOne
 	private User Patient_id;
@@ -30,7 +30,7 @@ public class Buy {
 		super();
 		this.id = id;
 		this.date = date;
-		this.prize = prize;
+		this.price = prize;
 		this.Patient_id = Patient_id;
 	}
 	
@@ -47,10 +47,10 @@ public class Buy {
 		this.date = date;
 	}
 	public float getPrize() {
-		return prize;
+		return price;
 	}
 	public void setPrize(float prize) {
-		this.prize = prize;
+		this.price = prize;
 	}
 	public User getPatient_id() {
 		return Patient_id;
@@ -61,6 +61,6 @@ public class Buy {
 	
 	@Override
 	public String toString() {
-		return "Buy [id=" + id + ", date=" + date + ", prize=" + prize + ", idPatient=" + Patient_id + "]";
+		return "Buy [id=" + id + ", date=" + date + ", prize=" + price + ", idPatient=" + Patient_id + "]";
 	}
 }

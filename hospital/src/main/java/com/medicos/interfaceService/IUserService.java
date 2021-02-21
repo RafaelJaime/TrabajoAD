@@ -14,6 +14,6 @@ public interface IUserService {
 	 public Optional<User>listId(int id);
 	 public int save(User u);
 	 public void delete(int id);
-	 List<User> findByRole(String role);
-	 User findByName(String name);
+	 public List<User> findByRole(String role);
+	 public User findByName(String name);
 }

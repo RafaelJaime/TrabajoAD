@@ -15,7 +15,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index2.html">SegPrivado</a>
+    <a href="/">SegPrivado</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -24,7 +24,35 @@
 
       <form th:action="@{/process_register}" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Name" name="name" id="name" autofocus required>
+          <input type="text" class="form-control" placeholder="Username" name="name" id="name" autofocus required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Firstname" name="firstname" id="firstname" autofocus required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Surname" name="surname" id="surname" autofocus required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" placeholder="Age" name="age" id="age" autofocus required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Direction" name="direction" id="direction" autofocus required>
           <div class="input-group-append">
             <div class="input-group-text">
             </div>

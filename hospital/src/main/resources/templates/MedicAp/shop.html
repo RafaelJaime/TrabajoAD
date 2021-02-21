@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantillas/base.html :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="plantillas/base.html :: headboard"></nav>
+		<aside th:replace="plantillas/base.html :: menu"></aside>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0">Medicines of SegPrivado</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Medicines</h5>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<td>Name</td>
+													<td>Description</td>
+													<td>Prescription</td>
+													<td>Price</td>
+													<td>Stock</td>
+													<td>Action</td>
+
+												</tr>
+											</thead>
+
+											<tbody th:each="medicine:${medicines}">
+												<form th:action="@{/patients/agregar}" th:object="${medicine}" method="post">
+												<tr>
+													<td th:text="${medicine.name}"></td>
+													<td th:text="${medicine.description}"></td>
+													<td th:text="${medicine.prescription}"></td>
+													<td th:text="${medicine.price}"></td>
+													<td th:text="${medicine.stock}"></td>
+													<td>
+													<form th:action="@{/patients/agregar/} + 1"
+															method="post">
+															<button type="submit" class="btn btn-primary">
+																Add to car
+															</button>
+														</form>
+												</tr>
+												</form>
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer th:replace="plantillas/base.html :: footer"></footer>
+	</div>
+	<div th:replace="plantillas/base.html :: js"></div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="plantillas/base.html :: head"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="plantillas/base.html :: headboard"></nav>
+		<aside th:replace="plantillas/base.html :: menu"></aside>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0">User Profile</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Profile</h5>
+								</div>
+								<div class="card-body">
+									<form th:action="@{/patients/profile}" method="post">
+										<div class="row">
+											<div th:object=${usuario}>
+												<div class="form-group">
+													<label>Name</label> <input th:field="*{firstname}"
+														type="text" class="form-control" />
+												</div>
+												<div class="form-group">
+													<label>Surname</label> <input th:field="*{surname}"
+														type="text" class="form-control" />
+												</div>
+												<div class="form-group">
+													<label>Age</label> <input th:field="*{age}" type="text"
+														class="form-control" />
+												</div>
+												<div class="form-group">
+													<label>Direction</label> <input th:field="*{direction}"
+														type="text" class="form-control" />
+												</div>
+
+											</div>
+										</div>
+									
+								</div>
+								<div class="card-footer" sec:authorize="hasRole('ROLE_PATIENT')">
+									<input type="submit" value="Edit" class="btn btn-success" />
+								</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer th:replace="plantillas/base.html :: footer"></footer>
+	</div>
+	<div th:replace="plantillas/base.html :: js"></div>
+</body>
+</html>

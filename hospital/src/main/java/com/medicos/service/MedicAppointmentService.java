@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.medicos.interfaceService.IMedicAppoService;
 import com.medicos.interfaces.IMedicalAppointment;
 import com.medicos.model.MedicalAppointment;
+import com.medicos.model.User;
 
 @Service
 public class MedicAppointmentService implements IMedicAppoService {
@@ -27,6 +28,12 @@ public class MedicAppointmentService implements IMedicAppoService {
 		if (!user.equals(null))
 			res = 1;
 		return res;
+	}
+
+	@Override
+	public List<MedicalAppointment> list(User patient) {
+		List<MedicalAppointment> medicalappointment = data.findByPatient_id(patient.getId());
+		return medicalappointment;
 	}
 
 }

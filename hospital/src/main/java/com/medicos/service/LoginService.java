@@ -24,7 +24,7 @@ public class LoginService implements UserDetailsService{
 		com.medicos.model.User user = repo.findByName(username);
 		
 		List<GrantedAuthority> roles = new ArrayList<>();
-		roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		roles.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 		
 		UserDetails userDet = new User(user.getName(),user.getPassword(),roles);
 		
