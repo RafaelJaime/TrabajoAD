@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IMedicineService;
 import com.medicos.interfaceService.IUserService;
@@ -45,13 +46,15 @@ public class Patient_controller {
 	public String aks(Model model) {
 		return "MedicAp/ask";
 	}
+	
 	@PostMapping({"/medicalAppointment", "/medicalappointment"})
-	public String saveAdd(@RequestParam(value="date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date, Model model, Principal principal) {
+	public String saveAdd(@RequestParam(value="date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date, Model model, Principal principal, RedirectAttributes flash) {
 		MedicalAppointment cita = new MedicalAppointment();
 		cita.setDate(date);
 		User usuario = service.findByName(principal.getName());
 		cita.setPatient(usuario);
 		medicap.save(cita);
+		flash.addFlashAttribute("success", "Medical appointment saved successfully.");
 		return "redirect:/";
 	}
 	@GetMapping({"/list", "/list"})
@@ -71,7 +74,7 @@ public class Patient_controller {
 		return "MedicAp/profile";
 	}
 	@PostMapping({"/Profile", "/profile"})
-	public String profileSave (User user,String password1, String password2, Model modelo, Principal principal) {
+	public String profileSave (User user,String password1, String password2, Model modelo, Principal principal, RedirectAttributes flash) {
 		User usuario = service.findByName(principal.getName());
 		if (!user.getFirstname().isEmpty()) {
 			usuario.setFirstname(user.getFirstname());
@@ -89,7 +92,7 @@ public class Patient_controller {
 			usuario.setPassword(encoder.encode(password2));
 		}
 		service.save(usuario);
-		System.out.println(usuario.toString());
+		flash.addFlashAttribute("success", "Profile saved successfully.");
 		modelo.addAttribute("usuario", usuario);
 		return "redirect:/profile";
 	}

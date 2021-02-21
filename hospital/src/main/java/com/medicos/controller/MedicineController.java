@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IMedicineService;
 import com.medicos.model.Medicine;
-import com.medicos.model.User;
 
 @Controller
 @RequestMapping("/medicine")
@@ -71,7 +70,7 @@ public class MedicineController {
 	@PostMapping("/stock")
 	public String changeStock(Model model, int id, int stock, RedirectAttributes flash) {
 		System.out.println(id);
-		Optional<Medicine> medicina = service.listId(id);
+		Optional<Medicine> medicina = service.findById(id);
 		Medicine medicin = medicina.get();
 		medicin.aumentarStock(stock);
 		service.save(medicin);
