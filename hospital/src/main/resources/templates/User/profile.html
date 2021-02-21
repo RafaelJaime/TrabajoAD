@@ -17,6 +17,7 @@
 			</div>
 			<section class="content">
 				<div class="container-fluid">
+					<div th:replace="plantillas/base.html :: messages"></div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
@@ -27,19 +28,19 @@
 									<div class="row">
 										<div th:object=${usuario}>
 											<div class="form-group">
-												<label>Username</label> 
+												<label>Username</label>
 												<p th:text="*{name}"></p>
 											</div>
 											<div class="form-group">
-												<label>Name</label> 
+												<label>Name</label>
 												<p th:text="*{firstname + ' ' + surname}"></p>
 											</div>
 											<div class="form-group">
-												<label>Age</label> 
+												<label>Age</label>
 												<p th:text="*{age}"></p>
 											</div>
 											<div class="form-group">
-												<label>Direction</label> 
+												<label>Direction</label>
 												<p th:text="*{direction}"></p>
 											</div>
 										</div>
@@ -47,8 +48,8 @@
 
 								</div>
 								<div class="card-footer" sec:authorize="hasRole('ROLE_PATIENT')">
-								<form th:action="@{/patients/profile}" method="get">
-									<input type="submit" value="Edit" class="btn btn-success" />
+									<form th:action="@{/patients/profile}" method="get">
+										<input type="submit" value="Edit" class="btn btn-success" />
 									</form>
 								</div>
 							</div>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IMedicineService;
 import com.medicos.model.Medicine;
@@ -35,13 +36,14 @@ public class MedicineController {
 	}
 	
 	@PostMapping("/save")
-	public String save(Medicine m,Model model) {
+	public String save(Medicine m,Model model, RedirectAttributes flash) {
 		service.save(m);
+		flash.addFlashAttribute("success", "Medicine saved successfully.");
 		return "redirect:/medicine/list";
 	}
 	
 	@PostMapping("/saveEdit")
-	public String saveEdit(Medicine m,Model model) {
+	public String saveEdit(Medicine m,Model model, RedirectAttributes flash) {
 		Medicine oldMedicine = service.findByName(m.getName());
 		oldMedicine.setName(m.getName());
 		oldMedicine.setDescription(m.getDescription());
@@ -49,6 +51,7 @@ public class MedicineController {
 		oldMedicine.setPrice(m.getPrice());
 		oldMedicine.setStock(m.getStock());
 		service.save(oldMedicine);
+		flash.addFlashAttribute("success", "Medicine saved successfully.");
 		return "redirect:/medicine/list";
 	}
 	
@@ -66,12 +69,13 @@ public class MedicineController {
 	}
 	
 	@PostMapping("/stock")
-	public String changeStock(Model model, int id, int stock) {
+	public String changeStock(Model model, int id, int stock, RedirectAttributes flash) {
 		System.out.println(id);
 		Optional<Medicine> medicina = service.listId(id);
 		Medicine medicin = medicina.get();
 		medicin.aumentarStock(stock);
 		service.save(medicin);
+		flash.addFlashAttribute("success", "Medicine daleted successfully.");
 		return "redirect:/medicine/list";
 	}
 }

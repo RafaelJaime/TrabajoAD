@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IUserService;
 import com.medicos.interfaces.IMedicalAppointment;
@@ -40,12 +41,13 @@ public class MedicAppointment_controller {
 		return "MedicAp/show";
 	}
 	@PostMapping("/save/{id}")
-	public String save(MedicalAppointment ma,Model model, Principal principal) {
+	public String save(MedicalAppointment ma,Model model, Principal principal, RedirectAttributes flash) {
 		MedicalAppointment appo = medicap.getOne(ma.getId());
 		appo.setObservations(ma.getObservations());
 		User usuario = service.findByName(principal.getName());
 		appo.setMedic(usuario);
 		medicap.save(appo);
+		flash.addFlashAttribute("success", "You specified the treatment successfully.");
 		return "redirect:/medicalAppointment/list";
 	}
 	@GetMapping({"/list", "/", ""})

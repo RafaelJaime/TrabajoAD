@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IUserService;
 import com.medicos.interfaces.IUser;
@@ -79,7 +78,7 @@ public class MainController {
     }
 	
 	@PostMapping("/process_register")
-	public String processRegister(User user) {
+	public String processRegister(User user, RedirectAttributes flash) {
 		User us=new User();
 		if (user.getAge()>= 18) {
 			us.setName(user.getName());
@@ -92,9 +91,11 @@ public class MainController {
 			us.setFirstname(user.getFirstname());
 			us.setSurname(user.getSurname());
 			repository.save(us);
+			flash.addFlashAttribute("success", "You have been register successfully, please check your email to confirm your account.");
 			return "redirect:/";
 		}
-		return "redirect:/login";
+		flash.addFlashAttribute("error", "Something has happened wrong and you have not been able to register.");
+		return "redirect:/register";
 	}
 	@GetMapping("/profile")
 	public String seeProfile(Model model, Principal principal) {

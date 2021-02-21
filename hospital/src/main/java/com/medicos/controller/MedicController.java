@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IUserService;
 import com.medicos.model.User;
@@ -56,7 +57,7 @@ public class MedicController {
 	}
 	
 	@PostMapping("/save")
-	public String save(User m,Model model) {
+	public String save(User m,Model model, RedirectAttributes flash) {
 		m.setRole("MEDIC");
 		User oldUser = service.findByName(m.getName());
 		if (oldUser.getName()==null) {
@@ -70,6 +71,7 @@ public class MedicController {
 		oldUser.setDate(oldUser.getDate());
 		oldUser.setSpecialty(m.getSpecialty());
 		service.save(oldUser);
+		flash.addFlashAttribute("success", "Medic saved successfully.");
 		return "redirect:/medic/list";
 	}
 	
@@ -81,8 +83,9 @@ public class MedicController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String delete(Model model, @PathVariable int id) {
+	public String delete(Model model, @PathVariable int id, RedirectAttributes flash) {
 		service.delete(id);
+		flash.addFlashAttribute("success", "Medic deletedsuccessfully.");
 		return "redirect:/medic/list";
 	}
 }
