@@ -35,7 +35,7 @@ public class MainController {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
-	@GetMapping("")
+	@GetMapping({"", "/", "/home"})
 	public String welcome(@RequestParam(required = false) String filter, Model model) {
 		List<User> listMedic = user.listMedics();
 		if (filter != null && !filter.isEmpty()) {
@@ -91,7 +91,7 @@ public class MainController {
 			us.setDirection(user.getDirection());
 			us.setFirstname(user.getFirstname());
 			us.setSurname(user.getSurname());
-			User newUser = repository.save(us);
+			repository.save(us);
 			return "redirect:/";
 		}
 		return "redirect:/login";
