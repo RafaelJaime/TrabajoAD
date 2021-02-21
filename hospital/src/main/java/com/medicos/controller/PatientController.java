@@ -37,7 +37,7 @@ public class PatientController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<User> patients=service.findByRole("ROLE_PATIENT");
+		List<User> patients=service.findByRole("PATIENT");
 		model.addAttribute("patients",patients);
 		return "Patient/Patientindex";
 	}
@@ -50,7 +50,7 @@ public class PatientController {
 	
 	@PostMapping("/saveAdd")
 	public String saveAdd(User m,Model model) {
-		m.setRole("ROLE_PATIENT");
+		m.setRole("PATIENT");
 		m.setPassword(encoder.encode(m.getPassword()));
 		service.save(m);
 		return "redirect:/patient/list";
@@ -58,7 +58,7 @@ public class PatientController {
 	
 	@PostMapping("/save")
 	public String save(User m,Model model) {
-		m.setRole("ROLE_PATIENT");
+		m.setRole("PATIENT");
 		User oldUser = service.findByName(m.getName());
 		System.out.println();
 		oldUser.setName(m.getName());
@@ -72,7 +72,7 @@ public class PatientController {
 	
 	@PostMapping("/saveEdit")
 	public String saveEdit(User m,Model model) {
-		m.setRole("ROLE_PATIENT");
+		m.setRole("PATIENT");
 		User oldUser = service.findByName(m.getName());
 		oldUser.setName(m.getName());
 		oldUser.setSurname(m.getSurname());

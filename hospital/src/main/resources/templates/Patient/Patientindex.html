@@ -27,16 +27,15 @@
 									<div class="row">
 										<a th:href="@{/patient/new}" class="btn btn-primary">Add
 											Patient</a>
-										<table class="table">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
-
 													<td>ID</td>
-													<td>NAME</td>
+													<td>USERNAME</td>
+													<td>FIRSTNAME</td>
 													<td>SURNAME</td>
 													<td>AGE</td>
 													<td>DIRECTION</td>
-													<td>FIRSTNAME</td>
 													<td>ACTIONS</td>
 
 												</tr>
@@ -47,14 +46,14 @@
 
 													<td th:text="${patient.id}"></td>
 													<td th:text="${patient.name}"></td>
+													<td th:text="${patient.firstname}"></td>
 													<td th:text="${patient.surname}"></td>
 													<td th:text="${patient.age}"></td>
 													<td th:text="${patient.direction}"></td>
-													<td th:text="${patient.firstname}"></td>
 													<td>
 														
 														<a th:href="@{/patient/modify/}+${patient.id}"
-														class="btn btn-warning">Modify</a>  | 
+														class="btn btn-warning">Modify</a>
 														<a th:href="@{/patient/delete/}+${patient.id}"
 														class="btn btn-danger">Delete</a>
 													</td>

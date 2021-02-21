@@ -36,7 +36,7 @@ public class MedicController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<User> medicos=service.findByRole("ROLE_MEDIC");
+		List<User> medicos=service.findByRole("MEDIC");
 		model.addAttribute("medicos",medicos);
 		return "Medic/Medicindex";
 	}
@@ -49,7 +49,7 @@ public class MedicController {
 	
 	@PostMapping("/saveAdd")
 	public String saveAdd(User m,Model model) {
-		m.setRole("ROLE_MEDIC");
+		m.setRole("MEDIC");
 		m.setPassword(encoder.encode(m.getPassword()));
 		service.save(m);
 		return "redirect:/medic/list";
@@ -57,14 +57,18 @@ public class MedicController {
 	
 	@PostMapping("/save")
 	public String save(User m,Model model) {
-		m.setRole("ROLE_MEDIC");
+		m.setRole("MEDIC");
 		User oldUser = service.findByName(m.getName());
-		oldUser.setName(m.getName());
-		oldUser.setSurname(m.getSurname());
-		oldUser.setAge(m.getAge());
-		oldUser.setDate(m.getDate());
-		oldUser.setSpecialty(m.getSpecialty());
+		if (oldUser.getName()==null) {
+			oldUser.setName(m.getName());
+		}
 		oldUser.setFirstname(m.getFirstname());
+		oldUser.setSurname(m.getSurname());
+		if (m.getAge()>= 18) {
+			oldUser.setAge(m.getAge());
+		}
+		oldUser.setDate(oldUser.getDate());
+		oldUser.setSpecialty(m.getSpecialty());
 		service.save(oldUser);
 		return "redirect:/medic/list";
 	}
