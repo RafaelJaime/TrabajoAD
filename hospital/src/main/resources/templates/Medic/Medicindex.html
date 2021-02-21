@@ -28,17 +28,17 @@
 										<a th:href="@{/medic/new}" class="btn btn-primary">Add
 											Medic</a>
 											<br>
-										<table class="table">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 
 													<td>ID</td>
-													<td>NAME</td>
+													<td>USERNAME</td>
+													<td>FIRST NAME</td>
 													<td>SURNAME</td>
 													<td>AGE</td>
 													<td>HIRE DATE</td>
 													<td>SPECIALTY</td>
-													<td>FIRST NAME</td>
 													<td>ACTIONS</td>
 
 												</tr>
@@ -49,11 +49,11 @@
 
 													<td th:text="${medico.id}"></td>
 													<td th:text="${medico.name}"></td>
+													<td th:text="${medico.firstname}"></td>
 													<td th:text="${medico.surname}"></td>
 													<td th:text="${medico.age}"></td>
 													<td th:text="${medico.date}"></td>
 													<td th:text="${medico.specialty}"></td>
-													<td th:text="${medico.firstname}"></td>
 													<td><a th:href="@{/medic/modify/}+${medico.id}"
 														class="btn btn-warning">Modify</a> <a
 														th:href="@{/medic/delete/}+${medico.id}"

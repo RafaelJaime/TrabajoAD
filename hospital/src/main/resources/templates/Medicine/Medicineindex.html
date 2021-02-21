@@ -27,7 +27,7 @@
 									<div class="row">
 										<a th:href="@{/medicine/new}" class="btn btn-primary">Add
 											Medicine</a>
-										<table class="table">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 
@@ -37,6 +37,7 @@
 													<td>PRESCRIPTION</td>
 													<td>PRICE</td>
 													<td>STOCK</td>
+													<td>ADD STOCK</td>
 													<td>ACTIONS</td>
 
 												</tr>
@@ -51,11 +52,17 @@
 													<td th:text="${medicine.prescription}"></td>
 													<td th:text="${medicine.price}"></td>
 													<td th:text="${medicine.stock}"></td>
-													<td><a th:href="@{/medicine/modify/}+${medicine.id}"
-														class="btn btn-warning">Modify</a> <a
-														th:href="@{/medicine/delete/}+${medicine.id}"
-														class="btn btn-danger">Delete</a></td>
-
+													<form method="POST" th:action="@{/medicine/stock}">
+														<input type="hidden" th:value="${medicine.id}" name="id"
+															id="id" />
+														<td><input type="number" id="stock" name="stock"
+															style="width: 60px" /></td>
+														<td><a th:href="@{/medicine/modify/}+${medicine.id}"
+															class="btn btn-warning">Modify</a> <a
+															th:href="@{/medicine/delete/}+${medicine.id}"
+															class="btn btn-danger">Delete</a> <input type="submit"
+															value="Modify Stock" class="btn btn-info" /></td>
+														</form>
 												</tr>
 											</tbody>
 										</table>

@@ -1,7 +1,12 @@
 package com.medicos.controller;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +49,35 @@ public class MedicAppointment_controller {
 		return "redirect:/medicalAppointment/list";
 	}
 	@GetMapping({"/list", "/", ""})
-	public String list(Model model) {
-		Collection<MedicalAppointment> appointment = medicap.findByObservations(null);
-		System.out.println(appointment);
-		model.addAttribute("medicap", appointment);
-		return "MedicAp/index";
+	public String list(Model model, Principal principal) {
+		User usuario = service.findByName(principal.getName());
+		Date fecha = new Date();
+		System.out.println(fecha);
+		
+		List<MedicalAppointment> appointment1 = medicap.findByObservationsNotNull(fecha);
+		
+		
+		int contador = 0;
+		for (MedicalAppointment medicalAppointment : appointment1) {
+			if (medicalAppointment.getMedic().getName() == principal.getName()) {
+				contador += 1;
+				System.out.println(medicalAppointment.getDate());
+			}
+		}
+		
+		
+		if (contador <= 10) {
+			Collection<MedicalAppointment> appointment = medicap.findByObservations(null);
+			System.out.println(appointment);
+			model.addAttribute("medicap", appointment);
+			return "MedicAp/index";
+		} else {
+			Collection<MedicalAppointment> appointment = medicap.findByObservations(null);
+			System.out.println(appointment);
+			model.addAttribute("medicap", appointment);
+			return "MedicAp/index2";
+		}
+		
 	}
 	@GetMapping("/patient")
 	public String patients(Model model) {

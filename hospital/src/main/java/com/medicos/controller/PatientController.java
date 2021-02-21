@@ -106,7 +106,7 @@ public class PatientController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<User> patients=service.findByRole("ROLE_PATIENT");
+		List<User> patients=service.findByRole("PATIENT");
 		model.addAttribute("patients",patients);
 		return "Patient/Patientindex";
 	}

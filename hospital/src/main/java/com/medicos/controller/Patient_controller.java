@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,8 @@ public class Patient_controller {
 	private IUserService service;
 	@Autowired
 	private IMedicine mediservice;
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@GetMapping({"/medicalAppointment", "/medicalappointment"})
 	public String aks(Model model) {
@@ -63,10 +66,12 @@ public class Patient_controller {
 	public String profile (Model modelo, Principal principal) {
 		User usuario = service.findByName(principal.getName());
 		modelo.addAttribute("usuario", usuario);
+		modelo.addAttribute("password1", "");
+		modelo.addAttribute("password2", "");
 		return "MedicAp/profile";
 	}
 	@PostMapping({"/Profile", "/profile"})
-	public String profileSave (User user, Model modelo, Principal principal) {
+	public String profileSave (User user,String password1, String password2, Model modelo, Principal principal) {
 		User usuario = service.findByName(principal.getName());
 		if (!user.getFirstname().isEmpty()) {
 			usuario.setFirstname(user.getFirstname());
@@ -79,6 +84,9 @@ public class Patient_controller {
 		}
 		if (!user.getDirection().isEmpty()) {
 			usuario.setDirection(user.getDirection());
+		}
+		if (encoder.matches(usuario.getPassword(), password1)) {
+			usuario.setPassword(encoder.encode(password2));
 		}
 		service.save(usuario);
 		System.out.println(usuario.toString());

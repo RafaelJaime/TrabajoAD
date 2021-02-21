@@ -64,4 +64,14 @@ public class MedicineController {
 		service.delete(id);
 		return "redirect:/medicine/list";
 	}
+	
+	@PostMapping("/stock")
+	public String changeStock(Model model, int id, int stock) {
+		System.out.println(id);
+		Optional<Medicine> medicina = service.listId(id);
+		Medicine medicin = medicina.get();
+		medicin.aumentarStock(stock);
+		service.save(medicin);
+		return "redirect:/medicine/list";
+	}
 }

@@ -59,12 +59,16 @@ public class MedicController {
 	public String save(User m,Model model) {
 		m.setRole("MEDIC");
 		User oldUser = service.findByName(m.getName());
-		oldUser.setName(m.getName());
-		oldUser.setSurname(m.getSurname());
-		oldUser.setAge(m.getAge());
-		oldUser.setDate(m.getDate());
-		oldUser.setSpecialty(m.getSpecialty());
+		if (oldUser.getName()==null) {
+			oldUser.setName(m.getName());
+		}
 		oldUser.setFirstname(m.getFirstname());
+		oldUser.setSurname(m.getSurname());
+		if (m.getAge()>= 18) {
+			oldUser.setAge(m.getAge());
+		}
+		oldUser.setDate(oldUser.getDate());
+		oldUser.setSpecialty(m.getSpecialty());
 		service.save(oldUser);
 		return "redirect:/medic/list";
 	}
