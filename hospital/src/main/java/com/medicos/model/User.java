@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
@@ -39,6 +40,7 @@ public class User {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date date;
 
     @Column(length=40)

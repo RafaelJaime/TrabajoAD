@@ -2,6 +2,7 @@ package com.medicos.controller;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,17 +14,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.medicos.interfaceService.IMedicAppoService;
 import com.medicos.interfaceService.IUserService;
 import com.medicos.interfaces.IMedicalAppointment;
 import com.medicos.model.MedicalAppointment;
 import com.medicos.model.User;
+import com.medicos.service.MedicAppointmentService;
 
 @Controller
 @RequestMapping("/patients")
 public class Patient_controller {
 	
 	@Autowired
-	private IMedicalAppointment medicap;
+	private MedicAppointmentService medicap;
 	@Autowired
 	private IUserService service;
 	
@@ -38,7 +41,13 @@ public class Patient_controller {
 		User usuario = service.findByName(principal.getName());
 		cita.setPatient(usuario);
 		medicap.save(cita);
-		System.out.println(date.toString());
 		return "redirect:/";
+	}
+	@GetMapping({"/list", "/list"})
+	public String list(Model model, Principal principal) {
+		User usuario = service.findByName(principal.getName());
+		List<MedicalAppointment> medicap2 = medicap.list(usuario);
+		model.addAttribute("medicap", medicap2);
+		return "MedicAp/list";
 	}
 }

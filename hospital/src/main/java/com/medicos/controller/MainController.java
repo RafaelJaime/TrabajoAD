@@ -1,5 +1,6 @@
 package com.medicos.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +25,12 @@ public class MainController {
 	
 	@Autowired
 	private IUserService user;
-	@Autowired
-	private IUser usuario;
 	
 	@Autowired
 	private IUser repository;
+	
+	@Autowired
+	private IUserService service;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -79,13 +81,26 @@ public class MainController {
 	@PostMapping("/process_register")
 	public String processRegister(User user) {
 		User us=new User();
-		us.setName(user.getName());
-		us.setPassword(encoder.encode(user.getPassword()));
-		us.setSpecialty("");
-		us.setRole("ROLE_USER");
-		User newUser = repository.save(us);
-		
-		return "User/register_success";
+		if (user.getAge()>= 18) {
+			us.setName(user.getName());
+			us.setPassword(encoder.encode(user.getPassword()));
+			System.out.println(user.getSpecialty());
+			us.setSpecialty(user.getSpecialty());
+			us.setRole("PATIENT");
+			us.setAge(user.getAge());
+			us.setDirection(user.getDirection());
+			us.setFirstname(user.getFirstname());
+			us.setSurname(user.getSurname());
+			User newUser = repository.save(us);
+			return "redirect:/";
+		}
+		return "redirect:/login";
+	}
+	@GetMapping("/profile")
+	public String seeProfile(Model model, Principal principal) {
+		User usuario = service.findByName(principal.getName());
+		model.addAttribute("usuario", usuario);
+		return "User/profile";
 	}
 
 }
