@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.medicos.interfaceService.IMedicineService;
@@ -44,6 +46,12 @@ public class MedicineService implements IMedicineService{
 	@Override
 	public Optional<Medicine> findById(int id) {
 		return data.findById(id);
+	}
+
+	@Override
+	public Page<Medicine> getAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return data.findAll(pageable);
 	}
 
 //	@Override
