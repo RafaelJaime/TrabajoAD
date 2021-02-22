@@ -20,7 +20,7 @@
 					<div th:replace="plantillas/base.html :: messages"></div>
 					<div class="row">
 						<div class="col-md-12">
-							<form th:action="@{/patients/medicalAppointment}" method="post">
+							<form th:action="@{/patients/pdf}" method="post">
 								<div class="card">
 									<div class="card-header">
 										<h5 class="card-title">Shopping car</h5>
@@ -33,6 +33,7 @@
 													<th>Description</th>
 													<th>Price</th>
 													<th>Prescription</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -53,7 +54,7 @@
 										</table>
 									</div>
 									<div class="card-footer">
-										<input type="submit" value="Buy" class="btn btn-success" />
+										<a href="/patients/pdf" class="btn btn-success">Buy</a>
 										</form>
 										<form th:action="@{/patients/destroy}" method="post">
 											<input type="submit" value="Cancel buy" class="btn btn-warning" />
