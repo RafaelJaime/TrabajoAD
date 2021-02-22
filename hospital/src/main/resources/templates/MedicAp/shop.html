@@ -40,7 +40,7 @@
 											</thead>
 
 											<tbody th:each="medicine:${medicines}">
-												<form th:action="@{/patients/agregar}" th:object="${medicine}" method="post">
+												<form th:action="@{/patients/add}" th:object="${medicine}" method="post">
 												<tr>
 													<td th:text="${medicine.name}"></td>
 													<td th:text="${medicine.description}"></td>
@@ -48,8 +48,7 @@
 													<td th:text="${medicine.price}"></td>
 													<td th:text="${medicine.stock}"></td>
 													<td>
-													<form th:action="@{/patients/agregar/} + 1"
-															method="post">
+															<input type="text" th:name="id" th:value="${medicine.id}" class="form-control" />
 															<button type="submit" class="btn btn-primary">
 																Add to car
 															</button>

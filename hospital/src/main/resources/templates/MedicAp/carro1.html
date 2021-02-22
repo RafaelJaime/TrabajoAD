@@ -17,14 +17,13 @@
 			</div>
 			<section class="content">
 				<div class="container-fluid">
-				<div th:replace="plantillas/base.html :: messages"></div>
+					<div th:replace="plantillas/base.html :: messages"></div>
 					<div class="row">
 						<div class="col-md-12">
 							<form th:action="@{/patients/medicalAppointment}" method="post">
 								<div class="card">
 									<div class="card-header">
 										<h5 class="card-title">Shopping car</h5>
-										<p th:text="${'Total: ' + total}" class="text-right"></p>
 									</div>
 									<div class="card-body">
 										<table class="table table-bordered">
@@ -34,35 +33,28 @@
 													<th>Description</th>
 													<th>Price</th>
 													<th>Prescription</th>
-													<th>Total</th>
-													<th>Remove from shopping car</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="producto, iterador : ${session.carrito}">
+												<tr th:each="producto : ${carro}">
 													<td th:text="${producto.name}"></td>
 													<td th:text="${producto.description}"></td>
 													<td th:text="${producto.price}"></td>
 													<td th:text="${producto.prescription}"></td>
-													<td th:text="${producto.total}"></td>
-													<td>
-														<form th:action="@{/patients/vender/quitar/} + ${iterador.index}"
-															method="post">
-															<button type="submit" class="btn btn-danger">
-																<i class="fa fa-trash"></i>
-															</button>
-														</form>
-													</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 									<div class="card-footer">
-										<input type="submit" value="End buy" class="btn btn-success" />
+										<input type="submit" value="Buy" class="btn btn-success" />
+										</form>
+										<form th:action="@{/patients/destroy}" method="post">
+											<input type="submit" value="Cancel buy" class="btn btn-warning" />
+										</form>
 									</div>
 
 								</div>
-							</form>
+							
 						</div>
 					</div>
 				</div>

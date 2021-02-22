@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -107,52 +108,90 @@ public class Patient_controller {
 	}
 	
 	@GetMapping({"Carrito", "carrito"})
-	public String carrito(Model model, HttpServletRequest request) {
-		ArrayList<Medicine> carro = this.obtenerCarrito(request);
-		int total = 0;
-		for (Medicine medicine : carro) total += 1;
-		model.addAttribute("total", total);
+	public String carrito(Model model, HttpSession sesion) {
+		List<Medicine> carrazo = (List<Medicine>) sesion.getAttribute("Lista");
+		
+		if (carrazo == null) {
+			carrazo = new ArrayList<Medicine>();
+		}
+		model.addAttribute("carro", carrazo);
 		return "MedicAp/carro1";
 	}
-	@PostMapping({"Agregar/{id}", "agregar/{id}"})
-	public String agregar(@PathVariable int id, HttpServletRequest request) {
-		ArrayList<Medicine> carrito = this.obtenerCarrito(request);
-		Medicine medicina = mediservice.findById(id).stream().findFirst().orElse(null);
-		System.out.println(medicina.getId());
-		for (Medicine medicine : carrito) {
-			if (medicine.getId() == medicina.getId()) {
-				carrito.add(medicina);
-				break;
-			}
+	
+	@PostMapping({"add", "Add"})
+	public String more(HttpSession sesion, @RequestParam int id) {
+		Optional<Medicine> medic = mediservice.findById(id);
+		System.out.println(medic.get().toString());
+		@SuppressWarnings("unchecked")
+		List<Medicine> medicinas = (List<Medicine>) sesion.getAttribute("Lista");
+		if (medicinas == null) {
+			sesion.setAttribute("Lista", new ArrayList<Medicine>());
 		}
-		this.guardarCarrito(carrito, request);
-		return "redirect:/patients/Shop";
+		medicinas.add(medic.get());
+		sesion.setAttribute("Lista", medicinas);
+		return "redirect:/patients/carrito";
+	}
+	@PostMapping("/destroy")
+	public String destroySession(HttpSession sesion) {
+		sesion.setAttribute("Lista", new ArrayList<Medicine>());
+		return "redirect:/patients/carrito";
 	}
 	
-	@PostMapping("/quitar/{indice}")
-	public String quitarDelCarrito(@PathVariable int indice, HttpServletRequest request) {
-	    ArrayList<Medicine> carrito = this.obtenerCarrito(request);
-	    if (carrito != null && carrito.size() > 0 && carrito.get(indice) != null) {
-	        carrito.remove(indice);
-	        this.guardarCarrito(carrito, request);
-	    }
-	    return "redirect:/Carrito";
-	}
-	
-	
-	
-	
-//	Métodos a parte
-	private ArrayList<Medicine> obtenerCarrito(HttpServletRequest request) {
-	    ArrayList<Medicine> carrito = (ArrayList<Medicine>) request.getSession().getAttribute("carrito");
-	    if (carrito == null) {
-	        carrito = new ArrayList<>();
-	    }
-	    System.out.println(carrito);
-	    return carrito;
-	}
-
-	private void guardarCarrito(ArrayList<Medicine> carrito, HttpServletRequest request) {
-	    request.getSession().setAttribute("carrito", carrito);
-	}
+//	
+//	@GetMapping({"Carrito", "carrito"})
+//	public String carrito(Model model, HttpSession sesion) {
+//		List<Medicine> carrazo = (List<Medicine>) sesion.getAttribute("Lista");
+//		
+//		if (carrazo == null) {
+//			carrazo = new ArrayList<Medicine>();
+//		}
+//		model.addAttribute("carro", carrazo);
+//		return "MedicAp/carro1";
+//	}
+//	@PostMapping("/destroy")
+//	public String destroySession(HttpServletRequest request) {
+//		request.getSession().invalidate();
+//		return "redirect:/";
+//	}
+//	@PostMapping({"Agregar/{id}", "agregar/{id}"})
+//	public String agregar(@PathVariable int id, HttpServletRequest request) {
+//		ArrayList<Medicine> carrito = this.obtenerCarrito(request);
+//		Medicine medicina = mediservice.findById(id).stream().findFirst().orElse(null);
+//		System.out.println(medicina.getId());
+//		for (Medicine medicine : carrito) {
+//			if (medicine.getId() == medicina.getId()) {
+//				carrito.add(medicina);
+//				break;
+//			}
+//		}
+//		this.guardarCarrito(carrito, request);
+//		return "redirect:/patients/Shop";
+//	}
+//	
+//	@PostMapping("/quitar/{indice}")
+//	public String quitarDelCarrito(@PathVariable int indice, HttpServletRequest request) {
+//	    ArrayList<Medicine> carrito = this.obtenerCarrito(request);
+//	    if (carrito != null && carrito.size() > 0 && carrito.get(indice) != null) {
+//	        carrito.remove(indice);
+//	        this.guardarCarrito(carrito, request);
+//	    }
+//	    return "redirect:/Carrito";
+//	}
+//	
+//	
+//	
+//	
+////	Métodos a parte
+//	private ArrayList<Medicine> obtenerCarrito(HttpServletRequest request) {
+//	    ArrayList<Medicine> carrito = (ArrayList<Medicine>) request.getSession().getAttribute("carrito");
+//	    if (carrito == null) {
+//	        carrito = new ArrayList<>();
+//	    }
+//	    System.out.println(carrito);
+//	    return carrito;
+//	}
+//
+//	private void guardarCarrito(ArrayList<Medicine> carrito, HttpServletRequest request) {
+//	    request.getSession().setAttribute("carrito", carrito);
+//	}
 }
