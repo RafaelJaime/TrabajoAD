@@ -54,9 +54,9 @@
 										</table>
 									</div>
 									<div class="card-footer">
-										<a href="/patients/pdf" class="btn btn-success">Buy</a>
+										<a href="/patients/pdf" class="btn btn-success" target="_blank">Buy</a>
 										</form>
-										<form th:action="@{/patients/destroy}" method="post">
+										<form th:action="@{/patients/destroy}" method="post" http-equiv="refresh">
 											<input type="submit" value="Cancel buy" class="btn btn-warning" />
 										</form>
 									</div>

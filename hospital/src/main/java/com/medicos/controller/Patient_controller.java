@@ -17,8 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lowagie.text.DocumentException;
 import com.medicos.configuration.PDF;
-import com.medicos.interfaceService.IMedicineService;
 import com.medicos.interfaceService.IUserService;
 import com.medicos.interfaces.IMedicine;
 import com.medicos.model.MedicalAppointment;
@@ -131,7 +128,9 @@ public class Patient_controller {
 		if (medicinas == null) {
 			sesion.setAttribute("Lista", new ArrayList<Medicine>());
 		}
-		medicinas.add(medic.get());
+		if (medic.get() != null) {
+			medicinas.add(medic.get());
+		}
 		sesion.setAttribute("Lista", medicinas);
 		return "redirect:/patients/carrito";
 	}
@@ -143,13 +142,17 @@ public class Patient_controller {
 	@GetMapping("/pdf")
 	public void exportToPDF(HttpServletResponse response, HttpSession sesion) throws DocumentException, IOException {
 		response.setContentType("application/pdf");
-		String date = new Date().toString();
 		String heeader = "SegPrivado";
-		String headerValue = "attachment; filename=SegPrivadoTicket.pdf";
+		String headerValue = "inline; filename=SegPrivadoTicket.pdf";
 		response.setHeader(heeader, headerValue);
+		@SuppressWarnings("unchecked")
 		List<Medicine> medicinas = (List<Medicine>) sesion.getAttribute("Lista");
-		
+		for (Medicine medicine : medicinas) {
+			medicine.reducirStock(1);
+			mediservice.save(medicine);
+		}
 		PDF pdf = new PDF(medicinas);
 		pdf.export(response);
+		sesion.setAttribute("Lista", new ArrayList<Medicine>());
 	}
 }
