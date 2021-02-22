@@ -2,6 +2,8 @@ package com.medicos.interfaces;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -14,4 +16,5 @@ public interface IMedicine extends CrudRepository<Medicine, Integer>{
 	public Medicine findByName(String name);
 	@Query("SELECT m FROM Medicine m where stock > 0")
 	public List<Medicine> findWithStock();
+	public Page<Medicine> findAll(Pageable pageable);
 }
