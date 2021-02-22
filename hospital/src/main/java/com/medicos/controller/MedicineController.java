@@ -9,6 +9,8 @@ import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.medicos.interfaceService.IMedicineService;
 import com.medicos.model.Medicine;
+import com.medicos.model.User;
 
 @Controller
 @RequestMapping("/medicine")
@@ -27,7 +30,7 @@ public class MedicineController {
 	@Autowired
 	private IMedicineService service;
 	
-	@GetMapping("/list")
+	@GetMapping(value="/list")
 	public String findAll(@RequestParam Map<String,Object>params, Model model) {
 		int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString())-1):0; 
 		
@@ -44,6 +47,7 @@ public class MedicineController {
 		
 		return "Medicine/Medicineindex";
 	}
+	
 
 	@GetMapping("/new")
 	public String add(Model model) {

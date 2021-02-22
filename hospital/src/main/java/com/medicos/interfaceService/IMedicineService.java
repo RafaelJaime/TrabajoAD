@@ -16,4 +16,6 @@ public interface IMedicineService {
 	 public void delete(int id);
 	 Medicine findByName(String name);
 	 public Optional<Medicine> findById(int id);
+	 Page<Medicine>findPaginate(int pageNo, int pageSize);
+	 
 }

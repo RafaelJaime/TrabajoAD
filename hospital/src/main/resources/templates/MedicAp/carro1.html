@@ -40,7 +40,14 @@
 													<td th:text="${producto.name}"></td>
 													<td th:text="${producto.description}"></td>
 													<td th:text="${producto.price}"></td>
-													<td th:text="${producto.prescription}"></td>
+													<div th:switch="${producto.prescription}">
+														<td th:case="'y'">
+															<i class="fas fa-clipboard-check"></i>
+														</td>
+														<td th:case="'n'">
+															<i class="fas fa-times-circle"></i>
+														</td>
+													</div>
 												</tr>
 											</tbody>
 										</table>
