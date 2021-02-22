@@ -44,7 +44,14 @@
 												<tr>
 													<td th:text="${medicine.name}"></td>
 													<td th:text="${medicine.description}"></td>
-													<td th:text="${medicine.prescription}"></td>
+													<div th:switch="${medicine.prescription}">
+														<td th:case="'y'">
+															<i class="fas fa-clipboard-check"></i>
+														</td>
+														<td th:case="'n'">
+															<i class="fas fa-times-circle"></i>
+														</td>
+													</div>
 													<td th:text="${medicine.price}"></td>
 													<td th:text="${medicine.stock}"></td>
 													<td>
