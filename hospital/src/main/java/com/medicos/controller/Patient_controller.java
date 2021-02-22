@@ -1,5 +1,6 @@
 package com.medicos.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lowagie.text.DocumentException;
+import com.medicos.configuration.PDF;
 import com.medicos.interfaceService.IMedicineService;
 import com.medicos.interfaceService.IUserService;
 import com.medicos.interfaces.IMedicine;
@@ -136,62 +140,16 @@ public class Patient_controller {
 		sesion.setAttribute("Lista", new ArrayList<Medicine>());
 		return "redirect:/patients/carrito";
 	}
-	
-//	
-//	@GetMapping({"Carrito", "carrito"})
-//	public String carrito(Model model, HttpSession sesion) {
-//		List<Medicine> carrazo = (List<Medicine>) sesion.getAttribute("Lista");
-//		
-//		if (carrazo == null) {
-//			carrazo = new ArrayList<Medicine>();
-//		}
-//		model.addAttribute("carro", carrazo);
-//		return "MedicAp/carro1";
-//	}
-//	@PostMapping("/destroy")
-//	public String destroySession(HttpServletRequest request) {
-//		request.getSession().invalidate();
-//		return "redirect:/";
-//	}
-//	@PostMapping({"Agregar/{id}", "agregar/{id}"})
-//	public String agregar(@PathVariable int id, HttpServletRequest request) {
-//		ArrayList<Medicine> carrito = this.obtenerCarrito(request);
-//		Medicine medicina = mediservice.findById(id).stream().findFirst().orElse(null);
-//		System.out.println(medicina.getId());
-//		for (Medicine medicine : carrito) {
-//			if (medicine.getId() == medicina.getId()) {
-//				carrito.add(medicina);
-//				break;
-//			}
-//		}
-//		this.guardarCarrito(carrito, request);
-//		return "redirect:/patients/Shop";
-//	}
-//	
-//	@PostMapping("/quitar/{indice}")
-//	public String quitarDelCarrito(@PathVariable int indice, HttpServletRequest request) {
-//	    ArrayList<Medicine> carrito = this.obtenerCarrito(request);
-//	    if (carrito != null && carrito.size() > 0 && carrito.get(indice) != null) {
-//	        carrito.remove(indice);
-//	        this.guardarCarrito(carrito, request);
-//	    }
-//	    return "redirect:/Carrito";
-//	}
-//	
-//	
-//	
-//	
-////	Métodos a parte
-//	private ArrayList<Medicine> obtenerCarrito(HttpServletRequest request) {
-//	    ArrayList<Medicine> carrito = (ArrayList<Medicine>) request.getSession().getAttribute("carrito");
-//	    if (carrito == null) {
-//	        carrito = new ArrayList<>();
-//	    }
-//	    System.out.println(carrito);
-//	    return carrito;
-//	}
-//
-//	private void guardarCarrito(ArrayList<Medicine> carrito, HttpServletRequest request) {
-//	    request.getSession().setAttribute("carrito", carrito);
-//	}
+	@GetMapping("/pdf")
+	public void exportToPDF(HttpServletResponse response, HttpSession sesion) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		String date = new Date().toString();
+		String heeader = "SegPrivado";
+		String headerValue = "attachment; filename=SegPrivadoTicket.pdf";
+		response.setHeader(heeader, headerValue);
+		List<Medicine> medicinas = (List<Medicine>) sesion.getAttribute("Lista");
+		
+		PDF pdf = new PDF(medicinas);
+		pdf.export(response);
+	}
 }
